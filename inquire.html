@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Chi Tiết - Trường THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #16a34a;
+            --accent-color: #f59e0b;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            white-space: nowrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--dark-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4ba8 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* History Section */
+        .history-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .history-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .history-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .contact-details {
+            margin-top: 15px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0.5rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+            
+            .history-content {
+                flex-direction: column;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo img {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMmwxMCA2LjU3NkwyMiAxNC41ODV2My43MjFMMTIgMjIgMiAxOC4zMDZ2LTMuNzIxTDIgOC41NzZMMTIgMnoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTJhMiAyIDAgMCAwIDIgMHY3LjM1NmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAtOS4zMTJjMC0xLjIzLS44NzktMi4wNTItMi0yLjA1MnMtMiAuODIzLTIgMi4wNTJhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwIDkuMzEyVjEyYTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PC9zdmc+" alt="Logo Trường Lê Quý Đôn">
+                    <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="index.html#about">Our School</a></li>
+                        <li><a href="index.html#admission">Tuyển Sinh</a></li>
+                        <li><a href="index.html#academics">Học Thuật</a></li>
+                        <li><a href="index.html#student-life">Đời Sống Học Đường</a></li>
+                        <li><a href="index.html#contact">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> > <span>Thông tin chi tiết</span>
+        </div>
+
+   
+
+        <!-- History Section -->
+        <section class="content-section">
+            <h2 class="section-title">Lịch sử hình thành</h2>
+            <div class="history-content">
+                <div class="history-text">
+                    <p>Trường THPT Lê Quý Đôn được thành lập năm 1959, mang tên nhà bác học, nhà thơ lớn của dân tộc Việt Nam - Lê Quý Đôn. Trải qua hơn 60 năm xây dựng và phát triển, nhà trường đã không ngừng nỗ lực nâng cao chất lượng giáo dục toàn diện.</p>
+                    <p>Với đội ngũ giáo viên giàu kinh nghiệm, tâm huyết và cơ sở vật chất hiện đại, trường THPT Lê Quý Đôn tự hào là một trong những trường trung học phổ thông hàng đầu của thành phố, liên tục đạt danh hiệu tập thể lao động xuất sắc.</p>
+                    <p>Trường đã đào tạo nhiều thế hệ học sinh ưu tú, trong đó có nhiều nhà lãnh đạo, doanh nhân, nhà khoa học và nghệ sĩ nổi tiếng đóng góp tích cực cho sự phát triển của đất nước.</p>
+                </div>
+                <div class="history-image">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Lịch sử trường Lê Quý Đôn">
+                </div>
+            </div>
+        </section>
+
+        <!-- General Information -->
+        <section class="content-section">
+            <h2 class="section-title">Thông tin chung</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Quy mô đào tạo</h3>
+                    <p>45 lớp với hơn 1800 học sinh</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Đội ngũ giáo viên</h3>
+                    <p>85 giáo viên, 100% có trình độ đạt chuẩn</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Thành tích</h3>
+                    <p>12 năm liền đạt trường chuẩn quốc gia</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Tỷ lệ tốt nghiệp</h3>
+                    <p>98-100% hàng năm</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="content-section">
+            <h2 class="section-title">Thành tích nổi bật</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-title">Học sinh giỏi quốc gia</div>
+                    <p>152 giải học sinh giỏi cấp quốc gia các môn văn hóa</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-title">Thi Olympic</div>
+                    <p>38 huy chương các kỳ thi Olympic khu vực và quốc tế</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-title">Thể thao - Nghệ thuật</div>
+                    <p>243 giải cấp thành phố và quốc gia</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-title">Đại học</div>
+                    <p>92% học sinh đỗ đại học hàng năm</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities -->
+        <section class="content-section">
+            <h2 class="section-title">Cơ sở vật chất</h2>
+            <p>Trường được đầu tư hệ thống cơ sở vật chất hiện đại, đáp ứng nhu cầu dạy và học trong thời kỳ mới:</p>
+            <ul style="margin: 15px 0 15px 30px;">
+                <li>35 phòng học khang trang, đầy đủ trang thiết bị</li>
+                <li>10 phòng chức năng: Lý, Hóa, Sinh, Tin học, Ngoại ngữ</li>
+                <li>Thư viện với hơn 10.000 đầu sách</li>
+                <li>Nhà đa năng với sân bóng đá, bóng rổ, cầu lông</li>
+                <li>Khu ký túc xá cho học sinh ở xa</li>
+                <li>Khu căn tin rộng rãi, đảm bảo vệ sinh an toàn thực phẩm</li>
+            </ul>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Phòng học">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://nangkhieutdtt.bacninh.edu.vn/upload/104885/fck/files/z3357699088121_77d3695a593dcf32483387e9f32771bb.jpg" alt="Thư viện">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lockernlock.vn/wp-content/uploads/2023/10/truong-quoc-te-nam-sai-gon-4.jpg" alt="Phòng thí nghiệm">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sân thể thao">
+                </div>
+            </div>
+        </section>
+
+        <!-- Extracurricular Activities -->
+        <section class="content-section">
+            <h2 class="section-title">Hoạt động ngoại khóa</h2>
+            <p>Nhà trường chú trọng phát triển toàn diện cho học sinh thông qua các hoạt động ngoại khóa đa dạng:</p>
+            <ul style="margin: 15px 0 15px 30px;">
+                <li>Câu lạc bộ STEM, Nghệ thuật, Thể thao</li>
+                <li>Hoạt động tình nguyện, hướng nghiệp</li>
+                <li>Giao lưu với học sinh quốc tế</li>
+                <li>Các cuộc thi sáng tạo, hùng biện</li>
+                <li>Chương trình trải nghiệm thực tế</li>
+            </ul>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nghệ thuật">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Thể thao">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Câu lạc bộ">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoạt động nhóm">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+    
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trường THPT Lê Quý Đôn</h3>
+                    <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+                        <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+                        <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+                        <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+                        <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+                        <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Giờ Mở Cửa</h3>
+                    <ul>
+                        <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+                        <li>Thứ 7: 7:00 - 11:30</li>
+                        <li>Chủ nhật: Nghỉ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId.startsWith('index.html')) {
+                    window.location.href = targetId;
+                    return;
+                }
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

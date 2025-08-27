@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #16a34a;
+            --accent-color: #f59e0b;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            white-space: nowrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        /* CTA lớn dưới bước tuyển sinh */
+.cta-actions{
+  text-align:center;
+  margin-top:2rem;
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-lg{
+  padding:1rem 2.25rem;
+  border-radius:50px;
+  font-size:1.05rem;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+.btn-lg i{ margin-right:.5rem; }
+
+/* Nút viền phụ */
+.btn.btn-outline{
+  background:transparent;
+  color:var(--primary-color);
+  border:2px solid var(--primary-color);
+}
+.btn.btn-outline:hover{
+  background:var(--primary-color);
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+/* Khối FAQ nhanh */
+.faq-quick{
+  margin-top:2.5rem;
+}
+.faq-quick__inner{
+  background: linear-gradient(135deg, rgba(30,58,138,0.95), rgba(22,163,74,0.95));
+  color:#fff;
+  border-radius:16px;
+  padding:1.5rem;
+  box-shadow:0 10px 24px rgba(0,0,0,0.15);
+}
+.faq-quick__head{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.faq-quick__head i{
+  font-size:1.75rem;
+}
+.faq-quick__head h3{
+  margin:0;
+  font-size:1.4rem;
+}
+.faq-quick__head p{
+  margin:.2rem 0 0 0;
+  opacity:.9;
+}
+
+/* Các nút nhanh trong FAQ */
+.faq-quick__actions{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+}
+.quick-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.75rem 1.1rem;
+  background:#ffffff;
+  color:var(--dark-color);
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+.quick-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+.quick-btn i{
+  font-size:1rem;
+}
+
+/* Responsive tinh chỉnh */
+@media (max-width:768px){
+  .btn-lg{ width:100%; justify-content:center; text-align:center; }
+  .faq-quick__head{ align-items:flex-start; }
+}
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(30, 58, 138, 0.7)), url('https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/477094137_608801668748506_8900919973110462867_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=ZK5MW7FYwbUQ7kNvwEr6nfX&_nc_oc=AdmrDBef-zm1R7CGcqRHOe9IRQJMxNVT3sqoCWPaIJCB4ZL4Tb8ioY0yK48aAeMbIv0&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=oRM2goyN8PAyOiIAHu4kzQ&oh=00_AfVYEOG4TZJLgRpOPNXCCac1Lbe-lu3v66UjmAD3s8zH7Q&oe=68B46FD7') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e69008;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .tabs {
+            margin-top: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark-color);
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .program-card-content {
+            padding: 1.5rem;
+        }
+
+        .program-card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card p {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-card .author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        /* Admission Section */
+        .admission {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .admission-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-card .number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--light-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 300px;
+            padding: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0.8rem;
+            }
+
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0.5rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .feature-card, .program-card, .testimonial-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo img {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+            
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMmwxMCA2LjU3NkwyMiAxNC41ODV2My43MjFMMTIgMjIgMiAxOC4zMDZ2LTMuNzIxTDIgOC41NzZMMTIgMnoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTJhMiAyIDAgMCAwIDIgMHY3LjM1NmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAtOS4zMTJjMC0xLjIzLS44NzktMi4wNTItMi0yLjA1MnMtMiAuODIzLTIgMi4wNTJhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwIDkuMzEyVjEyYTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PC9zdmc+" alt="Logo Trường Lê Quý Đôn">
+                    <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Trang Chủ</a></li>
+                        <li><a href="#about">Our School</a></li>
+                        <li><a href="#admission">Tuyển Sinh</a></li>
+                        <li><a href="#academics">Học Thuật</a></li>
+                        <li><a href="#student-life">Đời Sống Học Đường</a></li>
+                        <li><a href="#contact">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>TRƯỜNG THPT LÊ QUÝ ĐÔN</h2>
+                <p>Nơi ươm mầm những tài năng, chắp cánh những ước mơ. Hơn 60 năm xây dựng và phát triển, chúng tôi tự hào là ngôi trường hàng đầu về chất lượng giáo dục.</p>
+                <a href="#about" class="btn">Tìm hiểu thêm</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Những Điểm Nổi Bật</h2>
+                <p>Trường THPT Lê Quý Đôn tự hào với những ưu điểm vượt trội</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <i class="fas fa-star"></i>
+                    <h3>One of a Kind</h3>
+                    <p>Ngôi trường duy nhất với chương trình giáo dục toàn diện, kết hợp giữa truyền thống và hiện đại.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Greenest Campus</h3>
+                    <p>Khuôn viên xanh nhất với hơn 5ha diện tích cây xanh, không gian học tập lý tưởng và thân thiện với môi trường.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Most Experienced</h3>
+                    <p>Đội ngũ giáo viên giàu kinh nghiệm với hơn 70% có trình độ thạc sĩ, tiến sĩ và nhiều năm giảng dạy.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-users"></i>
+                    <h3>Inclusive to All</h3>
+                    <p>Môi trường giáo dục hòa nhập, tôn trọng sự đa dạng và phát huy tối đa tiềm năng của mỗi học sinh.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Network of Support</h3>
+                    <p>Hệ thống hỗ trợ toàn diện từ học thuật, tâm lý đến định hướng nghề nghiệp cho học sinh.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <i class="fas fa-globe"></i>
+                    <h3>Ready for Anywhere</h3>
+                    <p>Chuẩn bị hành trang vững chắc để học sinh sẵn sàng hội nhập toàn cầu và thành công ở mọi môi trường.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our School</h2>
+                <p>Tìm hiểu về ngôi trường THPT Lê Quý Đôn của chúng tôi</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Trường Lê Quý Đôn">
+                </div>
+                <div class="about-text">
+                    <h2>Ngôi trường với bề dày truyền thống</h2>
+                    <p>Thành lập năm 1959, trường THPT Lê Quý Đôn tự hào là một trong những trường trung học phổ thông lâu đời và uy tín nhất. Với hơn 60 năm phát triển, chúng tôi đã đào tạo nhiều thế hệ học sinh ưu tú, trở thành những công dân có ích cho xã hội.</p>
+                    
+                    <div class="tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="tab1">Sự Khác Biệt</button>
+                            <button class="tab-btn" data-tab="tab2">Sứ Mệnh & Giá Trị</button>
+                            <button class="tab-btn" data-tab="tab3">Cơ Sở Vật Chất</button>
+                            <button class="tab-btn" data-tab="tab4">Cộng Đồng Phụ Huynh</button>
+                            <button class="tab-btn" data-tab="tab5">Đội Ngũ Giáo Viên</button>
+                        </div>
+                        <div class="tab-content active" id="tab1">
+                            <p>Trường Lê Quý Đôn khác biệt với chương trình giáo dục toàn diện, chú trọng phát triển cả trí tuệ, thể chất và nhân cách. Chúng tôi áp dụng phương pháp giảng dạy hiện đại, học đi đôi với hành, lý thuyết gắn liền với thực tiễn.</p>
+                        </div>
+                        <div class="tab-content" id="tab2">
+                            <p><strong>Sứ mệnh:</strong> Cung cấp môi trường giáo dục chất lượng cao, phát huy tối đa tiềm năng của học sinh, trang bị kiến thức và kỹ năng để thành công trong cuộc sống.</p>
+                            <p><strong>Giá trị cốt lõi:</strong> Tôn trọng, trách nhiệm, chính trực, sáng tạo và hợp tác.</p>
+                        </div>
+                        <div class="tab-content" id="tab3">
+                            <p>Khuôn viên trường rộng 5ha với đầy đủ trang thiết bị hiện đại: phòng học thông minh, thư viện điện tử, phòng thí nghiệm, nhà thi đấu đa năng, sân bóng đá, bể bơi, khu vui chơi và không gian xanh.</p>
+                        </div>
+                        <div class="tab-content" id="tab4">
+                            <p>Cộng đồng phụ huynh của trường luôn đồng hành cùng nhà trường trong việc giáo dục học sinh. Chúng tôi thường xuyên tổ chức các buổi họp phụ huynh, hội thảo và hoạt động giao lưu để tăng cường sự kết nối.</p>
+                        </div>
+                        <div class="tab-content" id="tab5">
+                            <p>Đội ngũ giáo viên của trường gồm những nhà giáo ưu tú, giàu kinh nghiệm và tâm huyết với nghề. Nhiều thầy cô đạt danh hiệu giáo viên dạy giỏi cấp thành phố và quốc gia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admission Section -->
+<section id="admission" class="admission">
+  <div class="container">
+    <div class="section-title">
+      <h2>Tuyển Sinh</h2>
+      <p>Thông tin về quy trình và điều kiện tuyển sinh</p>
+    </div>
+
+    <div class="admission-steps">
+      <div class="step-card fade-in">
+        <div class="number">1</div>
+        <h3><a href="inquire.html" style="color: inherit; text-decoration: none;">Inquire</a></h3>
+        <p>Tìm hiểu thông tin về trường và chương trình học</p>
+      </div>
+      <div class="step-card fade-in">
+        <div class="number">2</div>
+        <h3><a href="visit.html" style="color: inherit; text-decoration: none;">Visit</a></h3>
+        <p>Tham quan trường và gặp gỡ ban giám hiệu</p>
+      </div>
+      <div class="step-card fade-in">
+        <div class="number">3</div>
+        <h3><a href="applying.html" style="color: inherit; text-decoration: none;">Applying</a></h3>
+        <p>Nộp hồ sơ đăng ký tuyển sinh</p>
+      </div>
+      <div class="step-card fade-in">
+        <div class="number">4</div>
+        <h3>Interview</h3>
+        <p>Tham gia phỏng vấn và kiểm tra đầu vào</p>
+      </div>
+    </div>
+
+    <!-- CTA chính: Đăng ký -->
+    <div class="fade-in cta-actions">
+      <a href="applying.html" class="btn btn-lg">
+        <i class="fas fa-pen-to-square"></i> Đăng ký ngay
+      </a>
+      <a href="tuvantuyensinh.html" class="btn btn-outline">
+        <i class="fas fa-comments"></i> Tư vấn tuyển sinh
+      </a>
+    </div>
+
+    <!-- Thay FAQ cũ bằng khối CTA đẹp & thân thiện -->
+    <div class="fade-in faq-quick">
+      <div class="faq-quick__inner">
+        <div class="faq-quick__head">
+          <i class="fas fa-circle-question"></i>
+          <div>
+            <h3>Câu hỏi thường gặp</h3>
+            <p>Giải đáp nhanh các thắc mắc phổ biến của phụ huynh & học sinh</p>
+          </div>
+        </div>
+        <div class="faq-quick__actions">
+          <a href="faq.html" class="quick-btn">
+            <i class="fas fa-list-ul"></i> Xem FAQ
+          </a>
+          <a href="tuition.html" class="quick-btn">
+            <i class="fas fa-receipt"></i> Học phí
+          </a>
+          <a href="scholarship.html" class="quick-btn">
+            <i class="fas fa-award"></i> Học bổng
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Programs Section -->
+    <section id="academics" class="programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Chương Trình Học Thuật</h2>
+                <p>Các chương trình đào tạo chất lượng cao tại trường THPT Lê Quý Đôn</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chương trình THCS">
+                    <div class="program-card-content">
+                        <h3>Chương Trình THCS</h3>
+                        <p>Chương trình giáo dục toàn diện cho học sinh trung học cơ sở, kết hợp giữa kiến thức nền tảng và kỹ năng mềm.</p>
+                        <a href="academics.html#middle-school" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <img src="https://bcp.cdnchinhphu.vn/334894974524682240/2022/8/4/anh-giao-duc-16595922357451532793959-0-0-491-786-crop-1659592611800746320130.jpg" alt="Chương trình THPT">
+                    <div class="program-card-content">
+                        <h3>Chương Trình THPT</h3>
+                        <p>Chương trình giáo dục định hướng đại học với các môn học chuyên sâu và hướng nghiệp cho học sinh.</p>
+                        <a href="academics.html#high-school" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoạt động ngoại khóa">
+                    <div class="program-card-content">
+                        <h3>Hoạt Động Ngoại Khóa</h3>
+                        <p>Đa dạng các câu lạc bộ và hoạt động ngoại khóa phát triển kỹ năng toàn diện cho học sinh.</p>
+                        <a href="academics.html#extracurricular" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Life Section -->
+    <section id="student-life" class="programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Đời Sống Học Đường</h2>
+                <p>Những hoạt động đa dạng và phong phú dành cho học sinh</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nghệ thuật">
+                    <div class="program-card-content">
+                        <h3>Nghệ Thuật</h3>
+                        <p>Các hoạt động nghệ thuật đa dạng từ âm nhạc, hội họa, kịch nghệ giúp học sinh phát triển năng khiếu và sáng tạo.</p>
+                        <a href="student-life.html#arts" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Thể thao">
+                    <div class="program-card-content">
+                        <h3>Thể Thao</h3>
+                        <p>Hệ thống các môn thể thao đa dạng giúp học sinh rèn luyện sức khỏe, tinh thần đồng đội và kỷ luật.</p>
+                        <a href="student-life.html#sports" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+                <div class="program-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hoạt động ngoại khóa">
+                    <div class="program-card-content">
+                        <h3>Câu Lạc Bộ</h3>
+                        <p>Hơn 20 câu lạc bộ từ học thuật đến nghệ thuật, thể thao giúp học sinh phát triển toàn diện kỹ năng và đam mê.</p>
+                        <a href="student-life.html#clubs" class="btn">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cảm Nhận Của Phụ Huynh & Học Sinh</h2>
+                <p>Những chia sẻ chân thật từ cộng đồng trường Lê Quý Đôn</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <p>"Tôi rất hài lòng khi cho con theo học tại trường Lê Quý Đôn. Con tôi không chỉ học giỏi mà còn phát triển toàn diện về nhân cách và kỹ năng sống."</p>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Phụ huynh">
+                        <div>
+                            <h4>Chị Nguyễn Thị Hoa</h4>
+                            <p>Phụ huynh học sinh</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p>"Môi trường học tập tại Lê Quý Đôn giúp tôi trưởng thành hơn rất nhiều. Các thầy cô không chỉ dạy kiến thức mà còn là người định hướng và truyền cảm hứng."</p>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Học sinh">
+                        <div>
+                            <h4>Nguyễn Văn Nam</h4>
+                            <p>Cựu học sinh</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p>"Là giáo viên của trường, tôi tự hào về môi trường làm việc chuyên nghiệp và tận tâm. Chúng tôi luôn nỗ lực để mang lại những giờ học chất lượng nhất cho học sinh."</p>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Giáo viên">
+                        <div>
+                            <h4>Cô Trần Thị Minh</h4>
+                            <p>Giáo viên Toán</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trường THPT Lê Quý Đôn</h3>
+                    <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/truongthptlequydonq3tphcm"target="_blank"> <i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@TruonglequydonEduVn"target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+                        <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên Kết Nhanh</h3>
+                    <ul>
+                        <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+                        <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+                        <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+                        <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+                        <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Giờ Mở Cửa</h3>
+                    <ul>
+                        <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+                        <li>Thứ 7: 7:00 - 11:30</li>
+                        <li>Chủ nhật: Nghỉ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // FAQ functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('active');
+                
+                const icon = question.querySelector('i');
+                if (answer.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        // Form submission
+        const admissionForm = document.getElementById('admission-form');
+        if (admissionForm) {
+            admissionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Cảm ơn bạn đã gửi đơn đăng ký. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất!');
+                admissionForm.reset();
+            });
+        }
+
+        // Scroll animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Offset for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Smooth scrolling for "Tìm hiểu thêm" button in hero section
+        document.querySelector('.hero-content .btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70, // Offset for fixed header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

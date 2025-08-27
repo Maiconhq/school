@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chương Trình THCS • THPT • Hoạt Động Ngoại Khóa - THPT Lê Quý Đôn</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ===== Reset & Theme ===== */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary:#1e3a8a; /* indigo-800 */
+      --primary-2:#2d4ba8;
+      --secondary:#16a34a; /* green-600 */
+      --accent:#f59e0b; /* amber-500 */
+      --bg:#ffffff;
+      --light:#f3f4f6; /* gray-100 */
+      --soft:#fafafa; /* whitesmoke */
+      --ink:#111827; /* gray-900 */
+      --muted:#6b7280; /* gray-500 */
+      --border:#e5e7eb;
+      --success:#10b981; --danger:#ef4444;
+      --radius:14px;
+      --shadow-1:0 6px 24px rgba(0,0,0,.08);
+      --shadow-2:0 10px 30px rgba(30,58,138,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Be Vietnam Pro',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+    a{color:inherit}
+
+    /* ===== Layout Helpers ===== */
+    .container{width:92%;max-width:1220px;margin:0 auto}
+    .section{padding:2.5rem 0}
+    .kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+    .kicker i{color:var(--accent)}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .6rem;border-radius:999px;background:#eef2ff;color:var(--primary);font-weight:700;font-size:.83rem}
+
+    /* ===== Header ===== */
+    header{background:var(--primary);color:#fff;padding:1rem 0;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    .header-content{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .logo{display:flex;align-items:center;gap:.75rem}
+    .logo img{height:48px}
+    .logo h1{font-size:1.4rem;font-weight:800;white-space:nowrap}
+    nav ul{list-style:none;display:flex;gap:1.1rem;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+
+    /* ===== Hero ===== */
+    .pad-top{padding-top:96px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
+    .hero-card{background:radial-gradient(1100px 420px at -10% -80%, var(--primary-2) 0%, transparent 60%),linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-2)}
+    .hero h1{font-size:2.4rem;line-height:1.2;margin:.35rem 0 1rem}
+    .hero p{color:#e5e7eb}
+    .hero-actions{margin-top:1.2rem;display:flex;gap:.7rem;flex-wrap:wrap}
+    .btn{appearance:none;border:0;outline:0;cursor:pointer;border-radius:12px;padding:.9rem 1.1rem;font-weight:800}
+    .btn-primary{background:#fff;color:var(--primary)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.35);color:#fff}
+    .hero-media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-2);position:relative}
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+    .hero-stats{position:absolute;inset:auto 12px 12px auto;background:rgba(255,255,255,.95);color:var(--ink);border-radius:12px;padding:.6rem .85rem;box-shadow:var(--shadow-1);font-size:.9rem}
+
+    /* ===== Sticky TOC Layout ===== */
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:2rem}
+    .sidebar{position:sticky;top:100px;align-self:start}
+    .side-card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-1);padding:1rem}
+    .toc{display:grid;gap:.35rem;max-height:68vh;overflow:auto;scrollbar-width:thin}
+    .toc a{display:flex;gap:.6rem;align-items:flex-start;text-decoration:none;border-radius:10px;padding:.55rem .65rem;color:var(--ink);border:1px solid transparent}
+    .toc a small{color:var(--muted)}
+    .toc a:hover{background:var(--soft)}
+    .toc a.active{border-color:var(--primary);background:#eef2ff}
+
+    /* ===== Cards & Components ===== */
+    .card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-1)}
+    .card-body{padding:1.25rem 1.25rem}
+    .grid{display:grid;gap:1rem}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .grid-4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+    .feature{display:flex;gap:.9rem}
+    .feature i{width:38px;height:38px;border-radius:10px;background:#eef2ff;color:var(--primary);display:grid;place-items:center;flex:0 0 38px}
+    .feature h4{margin-bottom:.15rem}
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:var(--border);margin:1rem 0}
+
+    /* Tabs */
+    .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 1rem}
+    .tab{padding:.6rem .8rem;border:1px solid var(--border);border-radius:999px;background:#fff;cursor:pointer;font-weight:800}
+    .tab[aria-selected="true"]{border-color:var(--primary);background:#eef2ff;color:var(--primary)}
+
+    /* Timelines */
+    .timeline{display:grid;gap:1rem;position:relative}
+    .timeline .row{display:grid;grid-template-columns:140px 1fr;gap:1rem;align-items:start}
+    .timeline .time{font-weight:800;color:var(--primary)}
+    .timeline .box{background:#f9fafb;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:12px;padding:.8rem}
+
+    /* Table */
+    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+    th,td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left}
+    thead th{background:#f9fafb;font-weight:800}
+    tbody tr:hover{background:#fafafc}
+
+    /* CTA */
+    .cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:16px;padding:1.25rem}
+    .cta .btn-primary{background:var(--accent);color:#111827}
+
+    /* Footer */
+    footer{background:#111827;color:#fff;padding:3rem 0 1rem;margin-top:2.2rem}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
+    .footer-column h3{font-size:1.2rem;margin-bottom:1.5rem;color:var(--accent)}
+    .footer-column ul{list-style:none}
+    .footer-column li{margin-bottom:.8rem}
+    .footer-column a{color:#ddd;text-decoration:none}
+    .footer-column a:hover{color:var(--accent)}
+    .social-links{display:flex;gap:1rem;margin-top:1rem}
+    .social-links a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+    .social-links a:hover{background:var(--accent);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+
+    /* Back to top */
+    .to-top{position:fixed;right:20px;bottom:20px;z-index:999;background:#111827;color:#fff;border:0;border-radius:999px;width:44px;height:44px;display:grid;place-items:center;box-shadow:var(--shadow-2);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+    .to-top.show{opacity:1;pointer-events:auto}
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .header-content{flex-direction:column}
+      nav ul{justify-content:center}
+      .hero{grid-template-columns:1fr}
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:static}
+      .timeline .row{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .logo{flex-direction:column;text-align:center}
+      .logo h1{font-size:1.2rem}
+      nav ul{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img alt="Logo Trường Lê Quý Đôn" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJsMTAgNi41NzZMMjIgMTQuNTg1djMuNzIxTDEyIDIyIDIgMTguMzA2di0zLjcyMUwyIDguNTc2TDEyIDJaIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMCAyIDB2Ny4zNTZhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwLTkuMzEyYzAtMS4yMy0uODc5LTIuMDUyLTItMi4wNTJzLTIgLjgyMy0yIDIuMDUyYTQ2NS40NyA0NjUuNDcgMCAwIDAgMCA5LjMxMlYxMmEyIDIgMCAwIDAgMi0yeiIvPjwvc3ZnPg=="/>
+          <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+        </div>
+        <nav aria-label="Điều hướng chính">
+          <ul>
+            <li><a href="#thcs">THCS</a></li>
+            <li><a href="#thpt">THPT</a></li>
+            <li><a href="#hoat-dong">Ngoại Khóa</a></li>
+            <li><a href="applying.html">Nộp Hồ Sơ</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pad-top">
+    <!-- ===== Hero ===== -->
+    <section class="section">
+      <div class="container hero">
+        <div class="hero-card">
+          <span class="kicker"><i class="fa-solid fa-school"></i> Chương trình đào tạo</span>
+          <h1>THCS • THPT • Hoạt Động Ngoại Khóa</h1>
+          <p>Hệ thống giáo dục <strong>toàn diện</strong> dành cho học sinh trung học, cân bằng giữa <strong>kiến thức nền tảng</strong>, <strong>chuyên sâu định hướng đại học</strong> và <strong>phát triển kỹ năng</strong> qua hoạt động ngoại khóa.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#thcs"><i class="fa-solid fa-compass"></i>&nbsp;Khám phá THCS</a>
+            <a class="btn btn-ghost" href="#thpt"><i class="fa-solid fa-graduation-cap"></i>&nbsp;Lộ trình THPT</a>
+            <a class="btn btn-ghost" href="#hoat-dong"><i class="fa-solid fa-star"></i>&nbsp;Ngoại khóa</a>
+          </div>
+        </div>
+        <figure class="hero-media" aria-label="Ảnh hoạt động học sinh">
+          <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop" alt="Học sinh tham gia hoạt động học thuật và ngoại khóa" loading="lazy">
+          <figcaption class="hero-stats badge"><i class="fa-solid fa-bolt"></i> Lấy học sinh làm trung tâm</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== Sticky TOC + Content ===== -->
+    <section class="section" style="background:var(--soft)">
+      <div class="container layout">
+        <!-- Sidebar TOC -->
+        <aside class="sidebar">
+          <div class="side-card">
+            <div class="kicker"><i class="fa-solid fa-compass"></i> Mục lục nhanh</div>
+            <nav id="toc" class="toc" aria-label="Mục lục"></nav>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="grid" id="content">
+
+          <!-- ========== THCS ========== -->
+          <section class="card" id="thcs">
+            <div class="card-body">
+              <div class="kicker"><i class="fa-solid fa-children"></i> Bậc THCS (Lớp 6–9)</div>
+              <h2>Chương Trình THCS</h2>
+              <p class="muted">Chương trình giáo dục <strong>toàn diện</strong> cho học sinh trung học cơ sở, kết hợp giữa <strong>kiến thức nền tảng</strong> (Toán, Ngữ văn, Khoa học, Lịch sử–Địa lí, Ngoại ngữ) và <strong>kỹ năng mềm</strong> (giao tiếp, hợp tác, tư duy phản biện, công dân số).</p>
+              <div class="divider"></div>
+              <div class="grid grid-3">
+                <div class="feature"><i class="fa-solid fa-book-open"></i><div><h4>Nền tảng học thuật</h4><p class="muted">Củng cố kiến thức cốt lõi, tăng cường đọc hiểu, lập luận, tính toán.</p></div></div>
+                <div class="feature"><i class="fa-solid fa-gears"></i><div><h4>Học qua dự án</h4><p class="muted">STEM, thí nghiệm, sản phẩm thuyết trình; đánh giá đa dạng, công bằng.</p></div></div>
+                <div class="feature"><i class="fa-solid fa-heart-pulse"></i><div><h4>Phát triển cá nhân</h4><p class="muted">Kỹ năng sống, sức khỏe tinh thần–thể chất, nghệ thuật & thể thao.</p></div></div>
+              </div>
+              <div class="divider"></div>
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" aria-selected="true" data-tab="g6">Lớp 6</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="g7">Lớp 7</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="g8">Lớp 8</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="g9">Lớp 9</button>
+              </div>
+              <div id="tabpanels-thcs">
+                <div class="panel" data-panel="g6">
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-hashtag"></i><div><h4>Toán</h4><p class="muted">Số học nâng cao, hình phẳng cơ bản, tư duy thuật toán (Scratch).</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-language"></i><div><h4>Ngữ văn & Anh</h4><p class="muted">Đọc hiểu đa thể loại, viết đoạn; Tiếng Anh A2–B1.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-flask"></i><div><h4>Khoa học</h4><p class="muted">Thí nghiệm nhập môn, an toàn lab, quy trình khoa học.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-palette"></i><div><h4>Nghệ thuật</h4><p class="muted">Cơ bản mỹ thuật–âm nhạc, dự án sáng tạo.</p></div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="g7" hidden>
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-diagram-project"></i><div><h4>STEM tích hợp</h4><p class="muted">Mạch điện, robot nhập môn, tư duy thiết kế.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-book"></i><div><h4>Ngữ văn</h4><p class="muted">Văn nghị luận, thuyết trình thuyết phục.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-earth-asia"></i><div><h4>Lịch sử–Địa lí</h4><p class="muted">Bản đồ, địa lí Việt Nam & thế giới, kỹ năng tra cứu.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-futbol"></i><div><h4>Thể chất</h4><p class="muted">Phát triển thể lực, kỉ luật, tinh thần đồng đội.</p></div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="g8" hidden>
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-square-root-variable"></i><div><h4>Toán</h4><p class="muted">Đại số tuyến tính cơ bản, hình học không gian nhập môn.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-microscope"></i><div><h4>Khoa học</h4><p class="muted">Sinh – Hóa tách môn, thực hành định lượng.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-keyboard"></i><div><h4>Công nghệ</h4><p class="muted">Lập trình Python nhập môn, an toàn số.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-theater-masks"></i><div><h4>Nghệ thuật biểu đạt</h4><p class="muted">Kịch ngắn, nhiếp ảnh, thiết kế poster.</p></div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="g9" hidden>
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-chart-line"></i><div><h4>Ôn tập – Định hướng</h4><p class="muted">Chuẩn bị chuyển tiếp THPT, hồ sơ học tập, mục tiêu cá nhân.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-flask-vial"></i><div><h4>Dự án khoa học</h4><p class="muted">Dự án tổng hợp, báo cáo hội chợ khoa học.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-language"></i><div><h4>Tiếng Anh</h4><p class="muted">B1–B2, viết luận học thuật ngắn.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-users"></i><div><h4>Kỹ năng mềm</h4><p class="muted">Làm việc nhóm, lãnh đạo học sinh, quản lý thời gian.</p></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== THPT ========== -->
+          <section class="card" id="thpt">
+            <div class="card-body">
+              <div class="kicker"><i class="fa-solid fa-user-graduate"></i> Bậc THPT (Lớp 10–12)</div>
+              <h2>Chương Trình THPT</h2>
+              <p class="muted">Chương trình giáo dục <strong>định hướng đại học</strong> với các môn học <strong>chuyên sâu</strong> và <strong>hướng nghiệp</strong>, giúp học sinh xây dựng lộ trình học thuật cạnh tranh và hồ sơ tuyển sinh hiệu quả.</p>
+              <div class="divider"></div>
+              <div class="grid grid-3">
+                <div class="feature"><i class="fa-solid fa-layer-group"></i><div><h4>Tổ hợp linh hoạt</h4><p class="muted">Khoa học tự nhiên, khoa học xã hội, ngôn ngữ, CNTT; tùy chọn nâng cao.</p></div></div>
+                <div class="feature"><i class="fa-solid fa-briefcase"></i><div><h4>Hướng nghiệp</h4><p class="muted">Tư vấn ngành nghề, trải nghiệm thực tế, kết nối doanh nghiệp.</p></div></div>
+                <div class="feature"><i class="fa-solid fa-file-signature"></i><div><h4>Hồ sơ đại học</h4><p class="muted">Cố vấn học tập, nghiên cứu, hoạt động cộng đồng, luyện phỏng vấn.</p></div></div>
+              </div>
+              <div class="divider"></div>
+
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" aria-selected="true" data-tab="core">Môn cốt lõi</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="adv">Môn nâng cao</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="career">Hướng nghiệp</button>
+              </div>
+              <div id="tabpanels-thpt">
+                <div class="panel" data-panel="core">
+                  <table aria-label="Môn cốt lõi THPT">
+                    <thead><tr><th>Môn</th><th>Mô tả</th><th>Đầu ra mục tiêu</th></tr></thead>
+                    <tbody>
+                      <tr><td>Toán</td><td>Đại số, Giải tích, Hình học.</td><td>Năng lực mô hình hóa & lập luận.</td></tr>
+                      <tr><td>Ngữ văn</td><td>Văn học, viết luận học thuật.</td><td>Tư duy phản biện & diễn đạt.</td></tr>
+                      <tr><td>Tiếng Anh</td><td>Academic Writing, Presentation.</td><td>B2–C1, bài luận cá nhân.</td></tr>
+                      <tr><td>KHTN</td><td>Lý, Hóa, Sinh theo mô-đun.</td><td>Thực hành, nghiên cứu nhỏ.</td></tr>
+                      <tr><td>KHXH</td><td>Lịch sử, Địa lí, Kinh tế.</td><td>Nhận thức xã hội & dữ liệu.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel" data-panel="adv" hidden>
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-square-root-variable"></i><div><h4>Toán Nâng Cao</h4><p class="muted">Giải tích, xác suất, thống kê suy luận.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-atom"></i><div><h4>Vật lí Nâng Cao</h4><p class="muted">Cơ học, điện – từ, thí nghiệm mô phỏng.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-flask"></i><div><h4>Hóa Nâng Cao</h4><p class="muted">Phân tích định lượng, hữu cơ, sắc kí.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-dna"></i><div><h4>Sinh Nâng Cao</h4><p class="muted">Sinh học phân tử, di truyền ứng dụng.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-code"></i><div><h4>Khoa học Máy tính</h4><p class="muted">Python, cấu trúc dữ liệu, AI nhập môn.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-language"></i><div><h4>Tiếng Anh Học Thuật</h4><p class="muted">IELTS/TOEFL strategies, debate.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-business-time"></i><div><h4>Kinh tế & Kinh doanh</h4><p class="muted">Kinh tế học cơ bản, quản trị dự án mini.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-palette"></i><div><h4>Thiết kế – Nghệ thuật</h4><p class="muted">Thiết kế đồ họa, nhiếp ảnh, portfolio.</p></div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="career" hidden>
+                  <div class="timeline">
+                    <div class="row"><div class="time">Lớp 10</div><div class="box"><strong>Khám phá bản thân</strong>: trắc nghiệm sở thích – năng lực; talkshow ngành nghề; viết mục tiêu 3 năm.</div></div>
+                    <div class="row"><div class="time">Lớp 11</div><div class="box"><strong>Trải nghiệm & hồ sơ</strong>: dự án cộng đồng, mentor nghề nghiệp, học phần đại học mở, thực tập ngắn.</div></div>
+                    <div class="row"><div class="time">Lớp 12</div><div class="box"><strong>Ứng tuyển</strong>: chọn trường – ngành, hoàn thiện CV, bài luận, thư giới thiệu & luyện phỏng vấn.</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== Hoạt Động Ngoại Khóa ========== -->
+          <section class="card" id="hoat-dong">
+            <div class="card-body">
+              <div class="kicker"><i class="fa-solid fa-stars"></i> Beyond the Classroom</div>
+              <h2>Hoạt Động Ngoại Khóa</h2>
+              <p class="muted">Hệ sinh thái <strong>câu lạc bộ</strong>, <strong>giải đấu</strong>, <strong>trại trải nghiệm</strong> giúp phát triển năng lực toàn diện, tinh thần lãnh đạo và trách nhiệm cộng đồng.</p>
+              <div class="divider"></div>
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" aria-selected="true" data-tab="clubs">Câu lạc bộ</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="sports">Thể thao</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="service">Phục vụ cộng đồng</button>
+                <button class="tab" role="tab" aria-selected="false" data-tab="events">Sự kiện – Trại</button>
+              </div>
+              <div id="tabpanels-ec">
+                <div class="panel" data-panel="clubs">
+                  <div class="grid grid-4">
+                    <div class="feature"><i class="fa-solid fa-robot"></i><div><h4>Robotics</h4><p class="muted">Thi đấu robot, lập trình, cơ khí.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-microphone-lines"></i><div><h4>Debate & MUN</h4><p class="muted">Hùng biện, mô phỏng Liên Hợp Quốc.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-music"></i><div><h4>Band & Choir</h4><p class="muted">Biểu diễn, hòa âm, sự kiện trường.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-clapperboard"></i><div><h4>Media – Film</h4><p class="muted">Dựng phim, nhiếp ảnh, truyền thông.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-leaf"></i><div><h4>Eco Club</h4><p class="muted">Dự án môi trường, tái chế – xanh hóa.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-hand-holding-heart"></i><div><h4>Volunteer</h4><p class="muted">Thiện nguyện, gây quỹ cộng đồng.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-brain"></i><div><h4>Math/Science</h4><p class="muted">Olympic, nghiên cứu nhỏ, seminar.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-pen-nib"></i><div><h4>Creative Writing</h4><p class="muted">Tạp chí trường, blog, xuất bản.</p></div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="sports" hidden>
+                  <table aria-label="Môn thể thao">
+                    <thead><tr><th>Môn</th><th>Cấp độ</th><th>Mùa giải</th></tr></thead>
+                    <tbody>
+                      <tr><td>Bóng đá</td><td>THCS, THPT</td><td>Thu – Xuân</td></tr>
+                      <tr><td>Bóng rổ</td><td>THCS, THPT</td><td>Thu – Đông</td></tr>
+                      <tr><td>Bơi lội</td><td>THCS, THPT</td><td>Quanh năm</td></tr>
+                      <tr><td>Cầu lông</td><td>THCS, THPT</td><td>Xuân</td></tr>
+                      <tr><td>Điền kinh</td><td>THPT</td><td>Xuân</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel" data-panel="service" hidden>
+                  <div class="timeline">
+                    <div class="row"><div class="time">Học kì 1</div><div class="box">Chiến dịch <strong>Trái tim xanh</strong>: phân loại rác, trồng cây, tuyên truyền bảo vệ môi trường.</div></div>
+                    <div class="row"><div class="time">Giữa kì</div><div class="box">Dự án <strong>Chia sẻ yêu thương</strong>: quyên góp sách – đồ dùng, hỗ trợ học sinh khó khăn.</div></div>
+                    <div class="row"><div class="time">Học kì 2</div><div class="box"><strong>Service Day</strong>: 1 ngày thiện nguyện toàn trường, nhiều điểm đến cộng đồng.</div></div>
+                  </div>
+                </div>
+                <div class="panel" data-panel="events" hidden>
+                  <div class="grid grid-3">
+                    <div class="feature"><i class="fa-solid fa-campground"></i><div><h4>Trại kỹ năng</h4><p class="muted">Sinh tồn cơ bản, làm việc nhóm, lãnh đạo.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-award"></i><div><h4>Ngày hội STEAM</h4><p class="muted">Triển lãm dự án, thi sáng tạo.</p></div></div>
+                    <div class="feature"><i class="fa-solid fa-masks-theater"></i><div><h4>Festival nghệ thuật</h4><p class="muted">Sân khấu, tranh, ảnh, thời trang tái chế.</p></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+              <div class="note" role="note"><i class="fa-solid fa-circle-info"></i> Lịch tuyển thành viên CLB và đăng ký mùa giải sẽ công bố vào tuần lễ <strong>Orientation</strong> đầu năm. Học sinh có thể đề xuất mở CLB mới cùng giáo viên bảo trợ.</div>
+            </div>
+          </section>
+
+          <!-- CTA -->
+          <section class="cta" aria-label="Đăng ký tham quan – tư vấn">
+            <div>
+              <h3>Muốn trải nghiệm thực tế?</h3>
+              <p class="muted" style="color:#e5e7eb">Đăng ký tham quan campus hoặc nhận tư vấn lộ trình học phù hợp cho con.</p>
+            </div>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+              <a class="btn btn-primary" href="visit.html"><i class="fa-solid fa-location-dot"></i>&nbsp;Đặt lịch tham quan</a>
+              <a class="btn btn-primary" href="tuvantuyensinh.html"><i class="fa-solid fa-envelope-open-text"></i>&nbsp;Nhận tư vấn</a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trường THPT Lê Quý Đôn</h3>
+          <p>Hơn 60 năm truyền thống giáo dục xuất sắc, nuôi dưỡng tài năng và nhân cách.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+            <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+            <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="applying.html"><i class="fas fa-angle-right"></i> Nộp hồ sơ</a></li>
+            <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+            <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+            <li><a href="faq.html"><i class="fas fa-angle-right"></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Giờ mở cửa</h3>
+          <ul>
+            <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+            <li>Thứ 7: 7:00 - 11:30</li>
+            <li>Chủ nhật: Nghỉ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <button id="toTop" class="to-top" aria-label="Về đầu trang"><i class="fa-solid fa-arrow-up"></i></button>
+  <script>
+    // Smooth header links
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if (!href) return;
+        if (href.startsWith('#')){ e.preventDefault(); const el=document.querySelector(href); if (el){ window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});} }
+      });
+    });
+
+    // ===== Build TOC from #content sections =====
+    const content = document.getElementById('content');
+    const toc = document.getElementById('toc');
+    const sections = [...content.querySelectorAll('section.card[id]')];
+    sections.forEach(sec=>{
+      const id=sec.id; const title=sec.querySelector('h2')?.textContent?.trim()||id;
+      const sub = document.createElement('small'); sub.textContent = sec.querySelector('.kicker')?.textContent?.trim()||'';
+      const a = document.createElement('a'); a.href = `#${id}`; a.dataset.target = id; a.innerHTML = `<i class="fa-regular fa-compass"></i><span>${title}</span>`; if(sub.textContent) a.appendChild(sub);
+      toc.appendChild(a);
+    });
+
+    // Scrollspy
+    const tocLinks = [...toc.querySelectorAll('a[data-target]')];
+    const byId = Object.fromEntries(tocLinks.map(a=>[a.dataset.target,a]));
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ const id = entry.target.id; tocLinks.forEach(a=>a.classList.toggle('active', a.dataset.target===id)); }
+      })
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:[0,1]});
+    sections.forEach(el=>spy.observe(el));
+
+    // Back to top
+    const toTop=document.getElementById('toTop');
+    window.addEventListener('scroll',()=>{ toTop.classList.toggle('show', window.scrollY>400); });
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // ===== Tabs logic (generic) =====
+    function wireTabs(scopeId){
+      const scope = document.getElementById(scopeId);
+      const tabs = scope?.querySelectorAll('.tab');
+      const panelsWrap = scope?.nextElementSibling; // wrapper right after tabs
+      const wrapId = panelsWrap?.id||'';
+      const panels = panelsWrap?.querySelectorAll('.panel')||[];
+      tabs?.forEach(tab=>{
+        tab.addEventListener('click',()=>{
+          tabs.forEach(t=>t.setAttribute('aria-selected','false'));
+          tab.setAttribute('aria-selected','true');
+          const key = tab.dataset.tab;
+          panels.forEach(p=>{ p.toggleAttribute('hidden', p.dataset.panel!==key); });
+        });
+      });
+    }
+    wireTabs('thcs'); // uses tabs inside THCS card
+    // Re-wire for THPT & EC by specific containers
+    document.querySelectorAll('#thpt .tabs, #hoat-dong .tabs').forEach(tabsBar=>{
+      const panels = tabsBar.nextElementSibling?.querySelectorAll('.panel')||[];
+      tabsBar.querySelectorAll('.tab').forEach(tab=>{
+        tab.addEventListener('click',()=>{
+          tabsBar.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected','false'));
+          tab.setAttribute('aria-selected','true');
+          const key = tab.dataset.tab;
+          panels.forEach(p=>{ p.toggleAttribute('hidden', p.dataset.panel!==key); });
+        });
+      });
+    });
+
+    // Open hash on load
+    window.addEventListener('load',()=>{
+      if(location.hash){ const el = document.querySelector(location.hash); if(el){ window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});} }
+    });
+  </script>
+</body>
+</html>

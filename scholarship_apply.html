@@ -1,0 +1,451 @@
+<!-- =========================
+  File: scholarship-application.html
+  Description: One-page form for Study Abroad Scholarship application
+  Tech: Plain HTML/CSS/JS (no build tools). Drop-in to existing site.
+  Replace: WEB_APP_URL, SHEET_ID, FOLDER_ID in Apps Script below.
+========================== -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đăng ký Học bổng Du học – THPT Lê Quý Đôn</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary-color:#1e3a8a; --secondary-color:#16a34a; --accent-color:#f59e0b; --light-color:#f3f4f6; --dark-color:#1f2937;
+      --ring: 0 0 0 3px rgba(30,58,138,.15);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Be Vietnam Pro',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:#111;background:#fff;line-height:1.6}
+    .container{width:92%;max-width:1100px;margin:0 auto}
+    header{position:sticky;top:0;z-index:50;background:var(--primary-color);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{height:42px}
+    .brand h1{font-size:1.1rem;margin:0;font-weight:700;letter-spacing:.3px}
+
+    .hero{background:linear-gradient(180deg,#f8fafc,#fff);padding:36px 0 8px;border-bottom:1px solid #eef2f7}
+    .hero h2{color:var(--primary-color);font-size:1.8rem;margin:0 0 .4rem}
+    .hero p{color:#334155;margin:0}
+
+    /* card */
+    .card{background:#fff;border:1px solid #eef2f7;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,.05);overflow:hidden}
+    .card-hd{display:flex;align-items:center;gap:10px;padding:16px 18px;background:var(--light-color);border-bottom:1px solid #e5e7eb}
+    .card-hd h3{margin:0;font-size:1.05rem;color:#0f172a}
+    .card-bd{padding:18px}
+
+    /* form */
+    form{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .field{grid-column:span 12}
+    @media(min-width:700px){.sm-6{grid-column:span 6}.sm-4{grid-column:span 4}.sm-8{grid-column:span 8}.sm-3{grid-column:span 3}.sm-9{grid-column:span 9}}
+    label{display:block;font-weight:600;margin:4px 0 6px;color:#0f172a}
+    input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="number"],input[type="month"],select,textarea{width:100%;border:1px solid #e5e7eb;border-radius:10px;padding:11px 12px;font:inherit;transition:border .2s, box-shadow .2s;background:#fff}
+    textarea{min-height:96px;resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary-color);box-shadow:var(--ring)}
+    .hint{font-size:.85rem;color:#6b7280;margin-top:6px}
+    .row{display:flex;gap:10px;align-items:center}
+    .chip{display:inline-flex;align-items:center;gap:8px;background:#f8fafc;border:1px dashed #dbeafe;border-radius:999px;padding:6px 10px;font-size:.85rem;color:#1e3a8a}
+
+    .actions{display:flex;gap:12px;justify-content:flex-end;margin-top:8px}
+    .btn{appearance:none;border:0;border-radius:10px;padding:12px 16px;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--primary-color);color:#fff}
+    .btn-primary:hover{filter:brightness(.95)}
+    .btn-secondary{background:#fff;border:1px solid #e5e7eb}
+    .btn-warning{background:var(--accent-color);color:#111}
+
+    .req{color:#ef4444;margin-left:4px}
+    .sr{position:absolute;left:-10000px}
+
+    .divider{height:1px;background:#eef2f7;margin:12px 0}
+
+    .status{margin-top:14px;font-weight:600}
+    .ok{color:#16a34a}
+    .err{color:#dc2626}
+
+    .uploader input[type=file]{display:block;border:1px dashed #d1d5db;background:#fcfcfd;padding:10px;border-radius:10px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container hd">
+    <div class="brand">
+      <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMmwxMCA2LjU3NkwyMiAxNC41ODV2My43MjFMMTIgMjIgMiAxOC4zMDZ2LTMuNzIxTDIgOC41NzZMMTIgMnoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTJhMiAyIDAgMCAwIDIgMHY3LjM1NmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAtOS4zMTJjMC0xLjIzLS44NzktMi4wNTItMi0yLjA1MnMtMiAuODIzLTIgMi4wNTJhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwIDkuMzEyVjEyYTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PC9zdmc+" alt="Logo Trường Lê Quý Đôn">
+                    <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+                </div>
+    </div>
+    <div class="row"><span class="chip"><i class="fa-solid fa-graduation-cap"></i> Đăng ký học bổng du học</span></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h2>Form đăng ký Học bổng Du học</h2>
+    <p>Vui lòng điền đầy đủ thông tin bên dưới. Các trường có dấu <span class="req">*</span> là bắt buộc.</p>
+  </div>
+</section>
+
+<main class="container" style="padding:24px 0 40px">
+  <div class="card" aria-labelledby="formTitle">
+    <div class="card-hd"><h3 id="formTitle">Thông tin ứng viên</h3></div>
+    <div class="card-bd">
+      <form id="scholarshipForm" enctype="multipart/form-data">
+        <!-- 1. Thông tin cá nhân -->
+        <div class="field sm-6">
+          <label for="full_name">Họ và tên <span class="req">*</span></label>
+          <input id="full_name" name="full_name" type="text" required>
+        </div>
+        <div class="field sm-3">
+          <label for="dob">Ngày sinh <span class="req">*</span></label>
+          <input id="dob" name="dob" type="date" required>
+        </div>
+        <div class="field sm-3">
+          <label for="gender">Giới tính</label>
+          <select id="gender" name="gender">
+            <option value="">-- Chọn --</option>
+            <option>Nam</option>
+            <option>Nữ</option>
+            <option>Khác</option>
+            <option>Không muốn trả lời</option>
+          </select>
+        </div>
+        <div class="field sm-6">
+          <label for="nationality">Quốc tịch</label>
+          <input id="nationality" name="nationality" type="text" placeholder="Việt Nam">
+        </div>
+        <div class="field sm-6">
+          <label for="id_number">CMND/CCCD hoặc Hộ chiếu</label>
+          <input id="id_number" name="id_number" type="text">
+        </div>
+
+        <!-- 2. Liên hệ -->
+        <div class="field sm-6">
+          <label for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field sm-6">
+          <label for="phone">Số điện thoại <span class="req">*</span></label>
+          <input id="phone" name="phone" type="tel" required>
+        </div>
+        <div class="field sm-12">
+          <label for="address">Địa chỉ thường trú</label>
+          <textarea id="address" name="address" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành"></textarea>
+        </div>
+
+        <!-- 3. Thông tin phụ huynh/người bảo hộ -->
+        <div class="field sm-4">
+          <label for="guardian_name">Họ tên phụ huynh/người bảo hộ</label>
+          <input id="guardian_name" name="guardian_name" type="text">
+        </div>
+        <div class="field sm-4">
+          <label for="guardian_email">Email phụ huynh</label>
+          <input id="guardian_email" name="guardian_email" type="email">
+        </div>
+        <div class="field sm-4">
+          <label for="guardian_phone">SĐT phụ huynh</label>
+          <input id="guardian_phone" name="guardian_phone" type="tel">
+        </div>
+
+        <!-- 4. Học tập -->
+        <div class="field sm-6">
+          <label for="current_school">Trường đang học/đã tốt nghiệp <span class="req">*</span></label>
+          <input id="current_school" name="current_school" type="text" required>
+        </div>
+        <div class="field sm-3">
+          <label for="grade_or_year">Lớp/Khóa</label>
+          <input id="grade_or_year" name="grade_or_year" type="text" placeholder="VD: 12A1 / K2022">
+        </div>
+        <div class="field sm-3">
+          <label for="gpa">GPA (10/4.0) <span class="req">*</span></label>
+          <input id="gpa" name="gpa" type="text" required placeholder="VD: 8.6 hoặc 3.5">
+        </div>
+        <div class="field sm-4">
+          <label for="english_test">Chứng chỉ tiếng Anh</label>
+          <select id="english_test" name="english_test">
+            <option value="">-- Chọn --</option>
+            <option>IELTS</option>
+            <option>TOEFL iBT</option>
+            <option>Duolingo</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div class="field sm-2">
+          <label for="english_score">Điểm</label>
+          <input id="english_score" name="english_score" type="number" step="0.1">
+        </div>
+        <div class="field sm-6">
+          <label for="awards">Thành tích/giải thưởng nổi bật</label>
+          <textarea id="awards" name="awards" placeholder="Liệt kê tối đa 5 thành tích đáng chú ý"></textarea>
+        </div>
+
+        <!-- 5. Dự định du học -->
+        <div class="field sm-4">
+          <label for="target_country">Quốc gia mong muốn <span class="req">*</span></label>
+          <select id="target_country" name="target_country" required>
+            <option value="">-- Chọn --</option>
+            <option>Mỹ</option>
+            <option>Canada</option>
+            <option>Anh</option>
+            <option>Úc</option>
+            <option>New Zealand</option>
+            <option>Singapore</option>
+            <option>Nhật Bản</option>
+            <option>Hàn Quốc</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div class="field sm-4">
+          <label for="degree_level">Bậc học <span class="req">*</span></label>
+          <select id="degree_level" name="degree_level" required>
+            <option value="">-- Chọn --</option>
+            <option>THPT</option>
+            <option>Đại học</option>
+            <option>Thạc sĩ</option>
+            <option>Tiến sĩ</option>
+          </select>
+        </div>
+        <div class="field sm-4">
+          <label for="intended_major">Ngành dự định</label>
+          <input id="intended_major" name="intended_major" type="text" placeholder="VD: Khoa học máy tính">
+        </div>
+        <div class="field sm-4">
+          <label for="intake_month">Thời gian dự kiến nhập học</label>
+          <input id="intake_month" name="intake_month" type="month">
+        </div>
+        <div class="field sm-4">
+          <label for="scholarship_type">Hình thức học bổng mong muốn</label>
+          <select id="scholarship_type" name="scholarship_type">
+            <option value="">-- Chọn --</option>
+            <option>Toàn phần</option>
+            <option>Bán phần</option>
+            <option>Hỗ trợ học phí</option>
+          </select>
+        </div>
+        <div class="field sm-4">
+          <label for="heard_from">Bạn biết chương trình qua</label>
+          <select id="heard_from" name="heard_from">
+            <option value="">-- Chọn --</option>
+            <option>Website trường</option>
+            <option>Mạng xã hội</option>
+            <option>Thầy cô/cố vấn</option>
+            <option>Bạn bè/Người quen</option>
+            <option>Sự kiện tuyển sinh</option>
+          </select>
+        </div>
+
+        <!-- 6. Bài luận & câu hỏi -->
+        <div class="field sm-12">
+          <label for="essay">Bài luận cá nhân (tối đa ~1000 từ) <span class="req">*</span></label>
+          <textarea id="essay" name="essay" required placeholder="Chia sẻ mục tiêu học tập, lý do chọn ngành/quốc gia và vì sao bạn xứng đáng nhận học bổng…"></textarea>
+        </div>
+        <div class="field sm-12">
+          <label for="additional_support">Nhu cầu hỗ trợ tài chính bổ sung? Nếu có, vui lòng mô tả</label>
+          <textarea id="additional_support" name="additional_support"></textarea>
+        </div>
+
+        <!-- 7. Tài liệu đính kèm -->
+        <div class="field sm-6 uploader">
+          <label for="transcript_file">Bảng điểm (PDF/JPG/PNG) <span class="req">*</span></label>
+          <input id="transcript_file" name="transcript_file" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+          <div class="hint">Tối đa 10MB/tệp</div>
+        </div>
+        <div class="field sm-6 uploader">
+          <label for="english_cert_file">Chứng chỉ tiếng Anh (nếu có)</label>
+          <input id="english_cert_file" name="english_cert_file" type="file" accept=".pdf,.jpg,.jpeg,.png">
+        </div>
+        <div class="field sm-6 uploader">
+          <label for="recommendation_file">Thư giới thiệu (nếu có)</label>
+          <input id="recommendation_file" name="recommendation_file" type="file" accept=".pdf,.jpg,.jpeg,.png">
+        </div>
+        <div class="field sm-6 uploader">
+          <label for="portrait_file">Ảnh chân dung 3x4 (tùy chọn)</label>
+          <input id="portrait_file" name="portrait_file" type="file" accept=".jpg,.jpeg,.png">
+        </div>
+
+        <!-- 8. Cam kết -->
+        <div class="field sm-12">
+          <label class="row" style="font-weight:500">
+            <input type="checkbox" id="agree_terms" name="agree_terms" required>
+            <span>Tôi cam kết thông tin cung cấp là chính xác và đồng ý cho nhà trường xử lý dữ liệu phục vụ xét học bổng. <span class="req">*</span></span>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="saveDraftBtn"><i class="fa-regular fa-floppy-disk"></i> Lưu tạm</button>
+          <button type="reset" class="btn btn-warning"><i class="fa-solid fa-rotate"></i> Xóa nội dung</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Gửi đăng ký</button>
+        </div>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  // ====== Config: paste your deployed Apps Script Web App URL here ======
+  const WEB_APP_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+
+  const form = document.getElementById('scholarshipForm');
+  const statusEl = document.getElementById('status');
+  const saveDraftBtn = document.getElementById('saveDraftBtn');
+  const DRAFT_KEY = 'lqd_scholarship_draft_v1';
+
+  function setStatus(msg, ok){
+    statusEl.textContent = msg;
+    statusEl.className = 'status ' + (ok ? 'ok' : 'err');
+  }
+
+  function saveDraft(){
+    const data = new FormData(form);
+    const plain = {};
+    for (const [k,v] of data.entries()){
+      if (v instanceof File) continue; // don't store files in localStorage
+      plain[k] = v;
+    }
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(plain));
+    setStatus('Đã lưu tạm trên trình duyệt.', true);
+  }
+
+  function loadDraft(){
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return;
+    try{
+      const plain = JSON.parse(raw);
+      for (const [k,v] of Object.entries(plain)){
+        const el = form.elements[k];
+        if (!el) continue;
+        el.value = v;
+      }
+      setStatus('Đã khôi phục bản nháp trước đó.', true);
+    }catch(e){console.warn(e)}
+  }
+
+  saveDraftBtn.addEventListener('click', saveDraft);
+  window.addEventListener('beforeunload', saveDraft);
+  window.addEventListener('DOMContentLoaded', loadDraft);
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+
+    if (!WEB_APP_URL || WEB_APP_URL.startsWith('PASTE_')){
+      setStatus('❗ Vui lòng cấu hình WEB_APP_URL trong mã nguồn trước khi gửi.', false);
+      return;
+    }
+
+    setStatus('Đang gửi hồ sơ… vui lòng đợi', true);
+
+    try{
+      const fd = new FormData(form);
+      const resp = await fetch(WEB_APP_URL, { method:'POST', body: fd });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const json = await resp.json();
+      if (json.success){
+        setStatus('✅ Gửi thành công! Mã hồ sơ: ' + json.recordId, true);
+        localStorage.removeItem(DRAFT_KEY);
+        form.reset();
+      } else {
+        throw new Error(json.message || 'Gửi thất bại');
+      }
+    }catch(err){
+      console.error(err);
+      setStatus('❌ Có lỗi khi gửi hồ sơ: ' + err.message, false);
+    }
+  });
+</script>
+
+<!-- =========================
+  Google Apps Script (Code.gs)
+  - Create a Google Sheet. Copy its ID into SHEET_ID.
+  - Create (or choose) a Drive folder for uploads. Copy its ID into FOLDER_ID.
+  - In Apps Script editor, paste this code into Code.gs and deploy as Web App:
+    Deploy > New deployment > Web app > Execute as: Me; Who has access: Anyone with the link
+  - Put the Web App URL back to WEB_APP_URL above.
+========================== -->
+
+<!--
+/***** Code.gs *****/
+const SHEET_ID = 'PASTE_YOUR_SHEET_ID_HERE';
+const FOLDER_ID = 'PASTE_YOUR_UPLOADS_FOLDER_ID_HERE';
+
+function doPost(e){
+  try{
+    // CORS preflight handled implicitly; return JSON with appropriate headers below
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+    const folder = DriveApp.getFolderById(FOLDER_ID);
+
+    const p = e.parameter; // form fields
+    const files = e.files || {}; // uploaded files
+
+    // Save files (if any) into Drive folder, return shareable links
+    const saveFile = (key)=>{
+      const f = files[key];
+      if (!f) return '';
+      const blob = f; // already a Blob
+      const saved = folder.createFile(blob);
+      saved.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      return saved.getUrl();
+    };
+
+    const transcriptUrl      = saveFile('transcript_file');
+    const englishCertUrl     = saveFile('english_cert_file');
+    const recommendationUrl  = saveFile('recommendation_file');
+    const portraitUrl        = saveFile('portrait_file');
+
+    // Generate an ID
+    const recordId = 'SCH-' + Utilities.getUuid().slice(0,8).toUpperCase();
+    const ts = new Date();
+
+    // Append to sheet (update headers to match the list below)
+    const row = [
+      recordId, ts,
+      p.full_name, p.dob, p.gender, p.nationality, p.id_number,
+      p.email, p.phone, p.address,
+      p.guardian_name, p.guardian_email, p.guardian_phone,
+      p.current_school, p.grade_or_year, p.gpa, p.english_test, p.english_score, p.awards,
+      p.target_country, p.degree_level, p.intended_major, p.intake_month, p.scholarship_type, p.heard_from,
+      p.essay, p.additional_support,
+      transcriptUrl, englishCertUrl, recommendationUrl, portraitUrl,
+      e.origin || '', e.contextPath || ''
+    ];
+
+    sheet.appendRow(row);
+
+    // Email confirmation to applicant (optional)
+    if (p.email){
+      MailApp.sendEmail({
+        to: p.email,
+        name: 'THPT Lê Quý Đôn',
+        subject: 'Xác nhận nhận hồ sơ học bổng – ' + recordId,
+        htmlBody: `Chào ${p.full_name || 'bạn'},<br><br>
+          Nhà trường đã nhận được hồ sơ học bổng của bạn (mã: <b>${recordId}</b>) vào lúc ${ts}.<br>
+          Chúng tôi sẽ phản hồi kết quả hoặc yêu cầu bổ sung (nếu cần).<br><br>
+          Trân trọng,<br>THPT Lê Quý Đôn`,
+      });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({success:true, recordId}))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*')
+      .setHeader('Access-Control-Allow-Headers','*');
+  }catch(err){
+    return ContentService.createTextOutput(JSON.stringify({success:false, message: String(err)}))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*')
+      .setHeader('Access-Control-Allow-Headers','*');
+  }
+}
+
+function doGet(){
+  // For quick health-check
+  return ContentService.createTextOutput(JSON.stringify({ok:true}))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*');
+}
+-->
+
+</body>
+</html>

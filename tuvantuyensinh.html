@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tư vấn tuyển sinh | Trường THPT Lê Quý Đôn</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ====== Core / Reset (kế thừa phong cách chính) ====== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Be Vietnam Pro', sans-serif; }
+    :root { --primary-color:#1e3a8a; --secondary-color:#16a34a; --accent-color:#f59e0b; --light-color:#f3f4f6; --dark-color:#1f2937; }
+    html { scroll-behavior: smooth; }
+    body { line-height: 1.6; color: #111827; background: #fff; }
+
+    /* ====== Header (giữ như site chính) ====== */
+    header { background-color: var(--primary-color); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+    .header-content { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 50px; margin-right: 10px; }
+    .logo h1 { font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin-left: 1.5rem; white-space: nowrap; }
+    nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: inline-block; }
+    nav ul li a:hover { color: var(--accent-color); }
+
+    /* ====== Page Hero sang trọng ====== */
+    .sub-hero {
+      margin-top: 70px;
+      min-height: 55vh;
+      background:
+        radial-gradient(1200px 400px at 80% 10%, rgba(245,158,11,0.18), transparent 60%),
+        radial-gradient(800px 300px at 20% 20%, rgba(22,163,74,0.18), transparent 60%),
+        linear-gradient(135deg, rgba(30,58,138,0.95), rgba(30,58,138,0.85)),
+        url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff;
+      display: flex; align-items: center;
+    }
+    .sub-hero .content { padding: 3.5rem 0; text-align: left; }
+    .breadcrumbs { opacity:.9; margin-bottom: .75rem; font-size: .95rem; }
+    .breadcrumbs a{ color:#fef08a; text-decoration:none }
+    .page-title { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; font-weight: 800; letter-spacing:.2px }
+    .page-sub { margin-top: .75rem; max-width: 780px; opacity: .95; font-size: 1.05rem; }
+    .hero-ctas { margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:.75rem }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; background-color: var(--accent-color); color: #fff; padding: .9rem 1.4rem; border-radius: 999px; text-decoration: none; font-weight: 700; transition: .25s; box-shadow: 0 10px 24px rgba(0,0,0,.18); }
+    .btn:hover { transform: translateY(-3px); filter: brightness(.95); }
+    .btn.outline { background: transparent; border: 2px solid #fff; }
+
+    /* ====== Layout chính ====== */
+    main { padding: 3rem 0 4rem; background: linear-gradient(180deg,#fff, #fafafa); }
+    .grid { display:grid; gap:2rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: 1.7fr 1fr; }
+    @media (max-width: 992px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ====== Cards ====== */
+    .card { background:#fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.08); overflow:hidden; }
+    .card .card-body { padding: 1.5rem; }
+    .card h3 { color: var(--primary-color); font-size: 1.25rem; margin-bottom: .5rem; }
+    .muted { color:#6b7280; }
+
+    /* ====== Khối thông tin nhanh ====== */
+    .quick-stats { display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; }
+    .stat { background: linear-gradient(135deg, #ffffff, #f9fafb); border:1px solid #eef2ff; padding:1.25rem; border-radius:14px; text-align:center; }
+    .stat strong{ display:block; font-size:1.6rem; color:#111827 }
+    .stat span{ font-size:.9rem; color:#6b7280 }
+    @media (max-width:768px){ .quick-stats{ grid-template-columns: repeat(2,1fr);} }
+
+    /* ====== Hotline / Liên hệ nổi ====== */
+    .sticky-help { position: fixed; right: 18px; bottom: 18px; display:flex; flex-direction:column; gap:.5rem; z-index: 1100; }
+    .sticky-help a { display:flex; align-items:center; gap:.5rem; padding:.85rem 1rem; border-radius:999px; text-decoration:none; font-weight:700; box-shadow:0 12px 24px rgba(0,0,0,.12); transition:.25s }
+    .sticky-help a:hover { transform: translateY(-3px) }
+    .btn-hotline { background:#ef4444; color:#fff }
+    .btn-zalo { background:#fff; color:#0ea5e9; border:1px solid #e5e7eb }
+
+    /* ====== Quy trình & dịch vụ ====== */
+    .steps { counter-reset: step; display:grid; gap:1rem; }
+    .step { display:flex; gap:1rem; align-items:flex-start; padding:1.1rem; border:1px dashed #e5e7eb; border-radius:14px; background:#fff; }
+    .step::before{ counter-increment: step; content: counter(step); flex:0 0 36px; height:36px; display:grid; place-items:center; background:var(--primary-color); color:#fff; border-radius:999px; font-weight:800 }
+
+    /* ====== Nhóm tư vấn ====== */
+    .team { display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem; }
+    .member { background:#fff; border:1px solid #eef2ff; border-radius:14px; overflow:hidden; }
+    .member .top{ display:flex; align-items:center; gap:1rem; padding:1rem; }
+    .avatar{ width:56px; height:56px; border-radius:50%; object-fit:cover }
+    .badge { display:inline-block; padding:.25rem .6rem; background:#ecfeff; color:#0891b2; border-radius:999px; font-size:.75rem; font-weight:700 }
+    .member .info{ padding:0 1rem 1rem; color:#4b5563; font-size:.95rem }
+
+    /* ====== Biểu mẫu ====== */
+    .form { display:grid; gap:1rem }
+    .form .row { display:grid; grid-template-columns: repeat(2,1fr); gap:1rem }
+    .form label { font-weight:700; color:#111827; font-size:.95rem }
+    .form input, .form select, .form textarea { width:100%; padding:.9rem 1rem; border:1px solid #e5e7eb; border-radius:12px; font-size:1rem; background:#fff }
+    .form textarea{ min-height:120px }
+    .form small{ color:#6b7280 }
+    .btn-submit { background: linear-gradient(135deg, #16a34a, #22c55e); color:#fff; border:none; padding:1rem 1.25rem; border-radius:12px; font-weight:800; cursor:pointer; box-shadow: 0 10px 24px rgba(34,197,94,.25); transition:.25s }
+    .btn-submit:hover{ transform: translateY(-2px) }
+    @media (max-width:768px){ .form .row { grid-template-columns: 1fr; } }
+
+    /* ====== FAQ ====== */
+    .faq { display:grid; gap:.75rem }
+    .faq-item { border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fff }
+    .faq-q { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.2rem; cursor:pointer; font-weight:700 }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .3s ease; padding:0 1.2rem }
+    .faq-item.active .faq-a{ max-height:200px; padding-bottom:1rem }
+
+    /* ====== Map ====== */
+    .map { border-radius:16px; overflow:hidden; height: 320px; box-shadow:0 10px 24px rgba(0,0,0,.06) }
+
+    /* ====== Footer (giữ như site chính) ====== */
+    footer { background-color: var(--dark-color); color: white; padding: 3rem 0 1rem; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--accent-color); }
+    .footer-column ul { list-style: none; }
+    .footer-column ul li { margin-bottom: 0.8rem; }
+    .footer-column ul li a { color: #ddd; text-decoration: none; transition: color 0.3s; }
+    .footer-column ul li a:hover { color: var(--accent-color); }
+    .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+    .social-links a { display: inline-block; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; color: white; text-align: center; line-height: 40px; transition: all 0.3s; }
+    .social-links a:hover { background-color: var(--accent-color); transform: translateY(-3px); }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+    /* ====== Helpers ====== */
+    .section { padding: 2.25rem 0; }
+    .section h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--primary-color); margin-bottom: .35rem; }
+    .section p.lead { color:#4b5563; margin-bottom: 1rem; }
+    .mt-1{ margin-top:.25rem } .mt-2{ margin-top:.5rem } .mt-3{ margin-top:.75rem } .mt-4{ margin-top:1rem } .mt-6{ margin-top:1.5rem }
+  </style>
+</head>
+<body>
+  <!-- ====== Header (giữ nguyên cấu trúc như site chính) ====== -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Rya2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAy bDEwIDYuNTc2TDIyIDE0LjU4NXYzLjcyMUwxMiAyMiAyIDE4LjMwNnYtMy43MjFMMiA4LjU3NkwxMiAyWiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMmEyIDIgMCAwIDAgMiAwVjE5LjM1NmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAtOS4zMTJjMC0xLjIzLS44NzktMi4wNTItMi0yLjA1MnMtMiAuODIzLTIgMi4wNTJhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwIDkuMzEyVjEyYTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PC9zdmc+" alt="Logo Trường Lê Quý Đôn" />
+          <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html#home">Trang Chủ</a></li>
+            <li><a href="index.html#about">Our School</a></li>
+            <li><a href="index.html#admission">Tuyển Sinh</a></li>
+            <li><a href="index.html#academics">Học Thuật</a></li>
+            <li><a href="index.html#student-life">Đời Sống Học Đường</a></li>
+            <li><a href="#contact">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== Sub Hero ====== -->
+  <section class="sub-hero">
+    <div class="container">
+      <div class="content">
+        <div class="breadcrumbs"><a href="index.html">Trang chủ</a> / Tư vấn tuyển sinh</div>
+        <h2 class="page-title">Tư vấn tuyển sinh cá nhân hoá<br/>cho phụ huynh & học sinh</h2>
+        <p class="page-sub">Đội ngũ chuyên viên tuyển sinh của Lê Quý Đôn luôn sẵn sàng lắng nghe, định hướng chương trình phù hợp và đồng hành cùng gia đình trong suốt hành trình nộp hồ sơ.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#dang-ky"><i class="fa-solid fa-pen-to-square"></i>Đăng ký tư vấn miễn phí</a>
+          <a class="btn outline" href="#lich-tham-quan"><i class="fa-solid fa-school"></i>Đặt lịch tham quan</a>
+          <a class="btn outline" href="#faq"><i class="fa-solid fa-circle-question"></i>Xem câu hỏi thường gặp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <!-- Quick stats -->
+      <section class="section" aria-label="Thông tin nhanh">
+        <h2>Vì sao chọn tư vấn tại Lê Quý Đôn?</h2>
+        <p class="lead">Minh bạch – Nhanh chóng – Đồng hành tận tâm</p>
+        <div class="quick-stats mt-3">
+          <div class="stat"><strong><i class="fa-regular fa-clock"></i> 24h</strong><span>Phản hồi trong vòng 1 ngày làm việc</span></div>
+          <div class="stat"><strong><i class="fa-solid fa-user-check"></i> 1:1</strong><span>Tư vấn cá nhân hoá từng hồ sơ</span></div>
+          <div class="stat"><strong><i class="fa-solid fa-calendar-check"></i> Linh hoạt</strong><span>Lịch hẹn trực tiếp hoặc online</span></div>
+          <div class="stat"><strong><i class="fa-solid fa-shield-heart"></i> An tâm</strong><span>Bảo mật thông tin học sinh</span></div>
+        </div>
+      </section>
+
+      <!-- Dịch vụ tư vấn & Quy trình -->
+      <section class="section grid grid-2" aria-label="Dịch vụ tư vấn">
+        <div class="card">
+          <div class="card-body">
+            <h2>Dịch vụ tư vấn bao gồm</h2>
+            <div class="steps mt-3">
+              <div class="step"><div><strong>Định hướng chương trình phù hợp</strong><br/><span class="muted">Phân tích năng lực học tập, phong cách học, mục tiêu đại học để đề xuất lộ trình.</span></div></div>
+              <div class="step"><div><strong>Tư vấn hồ sơ & học bổng</strong><br/><span class="muted">Hướng dẫn giấy tờ, mốc thời gian, tiêu chí xét tuyển & cơ hội học bổng.</span></div></div>
+              <div class="step"><div><strong>Chuẩn bị phỏng vấn/kiểm tra</strong><br/><span class="muted">Bộ câu hỏi mẫu, tài liệu ôn luyện và buổi mock interview.</span></div></div>
+              <div class="step"><div><strong>Kết nối cộng đồng phụ huynh</strong><br/><span class="muted">Chia sẻ kinh nghiệm, giải đáp thắc mắc từ phụ huynh khoá trước.</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h2>Quy trình 4 bước</h2>
+            <ol class="mt-3" style="color:#374151; padding-left:1.25rem; display:grid; gap:.75rem">
+              <li><strong>Đăng ký thông tin</strong> – điền biểu mẫu hoặc gọi hotline.</li>
+              <li><strong>Gọi xác nhận</strong> – chuyên viên liên hệ trong 24h.</li>
+              <li><strong>Buổi tư vấn 1:1</strong> – trực tiếp tại trường hoặc trực tuyến.</li>
+              <li><strong>Kế hoạch hành động</strong> – nhận checklist & mốc thời gian rõ ràng.</li>
+            </ol>
+            <a class="btn mt-4" href="#dang-ky"><i class="fa-solid fa-bolt"></i> Bắt đầu ngay</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Đội ngũ tư vấn -->
+      <section class="section" aria-label="Đội ngũ tư vấn">
+        <h2>Đội ngũ tư vấn tuyển sinh</h2>
+        <p class="lead">Thân thiện, tận tâm và giàu kinh nghiệm</p>
+        <div class="team mt-3">
+          <div class="member">
+            <div class="top"><img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Cố vấn Tuyển sinh A"/><div><strong>Chị Nguyễn Thị Hoa</strong><br/><span class="badge">Trưởng bộ phận</span></div></div>
+            <div class="info">10+ năm tư vấn, am hiểu lộ trình vào các trường top tại TP.HCM. Chuyên mảng học bổng.</div>
+          </div>
+          <div class="member">
+            <div class="top"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Cố vấn Tuyển sinh B"/><div><strong>Cô Trần Thị Minh</strong><br/><span class="badge">Cố vấn học thuật</span></div></div>
+            <div class="info">Phụ trách định hướng môn chuyên, luyện phỏng vấn và ôn kiểm tra đầu vào.</div>
+          </div>
+          <div class="member">
+            <div class="top"><img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Cố vấn Tuyển sinh C"/><div><strong>Thầy Nguyễn Văn Nam</strong><br/><span class="badge">Cựu học sinh - Mentor</span></div></div>
+            <div class="info">Chia sẻ kinh nghiệm học tập, hoạt động ngoại khoá và phương pháp quản lý thời gian.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Biểu mẫu đăng ký tư vấn -->
+      <section id="dang-ky" class="section grid grid-2" aria-label="Đăng ký tư vấn">
+        <div class="card">
+          <div class="card-body">
+            <h2>Đăng ký tư vấn miễn phí</h2>
+            <p class="lead">Điền thông tin, chúng tôi sẽ liên hệ sớm nhất.</p>
+            <form id="advisory-form" class="form" aria-label="Form tư vấn">
+              <div class="row">
+                <div>
+                  <label for="fullname">Họ và tên</label>
+                  <input id="fullname" name="fullname" type="text" placeholder="Nguyễn Văn A" required />
+                </div>
+                <div>
+                  <label for="phone">Số điện thoại</label>
+                  <input id="phone" name="phone" type="tel" placeholder="09xx xxx xxx" required />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="phuhuynh@example.com" />
+                </div>
+                <div>
+                  <label for="grade">Khối lớp quan tâm</label>
+                  <select id="grade" name="grade" required>
+                    <option value="">-- Chọn --</option>
+                    <option>THCS</option>
+                    <option>THPT</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="method">Hình thức tư vấn</label>
+                  <select id="method" name="method">
+                    <option>Trực tiếp tại trường</option>
+                    <option>Gọi điện</option>
+                    <option>Trực tuyến (Google Meet/Zalo)</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="schedule">Thời gian mong muốn</label>
+                  <input id="schedule" name="schedule" type="datetime-local" />
+                  <small>Giờ làm việc: T2–T6 (7:00–17:00), T7 (7:00–11:30)</small>
+                </div>
+              </div>
+              <div>
+                <label for="message">Nhu cầu/Thắc mắc</label>
+                <textarea id="message" name="message" placeholder="Ví dụ: Quan tâm lớp chuyên Toán, cần tư vấn học bổng..."></textarea>
+              </div>
+              <button class="btn-submit" type="submit"><i class="fa-solid fa-paper-plane"></i> Gửi đăng ký</button>
+            </form>
+          </div>
+        </div>
+        <aside>
+          <div class="card">
+            <div class="card-body">
+              <h3>Liên hệ nhanh</h3>
+              <p class="mt-2"><i class="fa-solid fa-location-dot"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</p>
+              <p><i class="fa-solid fa-phone"></i> (028) 3829 8976</p>
+              <p><i class="fa-solid fa-envelope"></i> info@lequydon.edu.vn</p>
+              <a class="btn mt-3" href="#lich-tham-quan"><i class="fa-solid fa-calendar-days"></i> Đặt lịch tham quan</a>
+              <a class="btn outline mt-3" href="#faq"><i class="fa-regular fa-circle-question"></i> Câu hỏi thường gặp</a>
+            </div>
+          </div>
+          <div class="card mt-3">
+            <div class="card-body">
+              <h3>Tài liệu</h3>
+              <ul style="margin-top:.5rem; color:#374151; display:grid; gap:.5rem">
+                <li><i class="fa-regular fa-file-lines"></i> Brochure trường (PDF)</li>
+                <li><i class="fa-regular fa-file-lines"></i> Quy trình & tiêu chí tuyển sinh</li>
+                <li><i class="fa-regular fa-file-lines"></i> Chính sách học bổng</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Lịch tham quan -->
+      <section id="lich-tham-quan" class="section" aria-label="Lịch tham quan">
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-body">
+              <h2>Tham quan cơ sở vật chất</h2>
+              <p class="lead">Trải nghiệm thực tế khuôn viên xanh, lớp học thông minh và phòng thí nghiệm hiện đại.</p>
+              <div class="steps mt-3">
+                <div class="step"><div><strong>Khung giờ</strong><br/><span class="muted">Sáng: 8:00–10:00 · Chiều: 14:00–16:00 (T2–T6)</span></div></div>
+                <div class="step"><div><strong>Điểm hẹn</strong><br/><span class="muted">Sảnh chính – Bàn Tư vấn Tuyển sinh</span></div></div>
+                <div class="step"><div><strong>Đăng ký trước</strong><br/><span class="muted">Vui lòng đặt lịch để chúng tôi chuẩn bị đón tiếp chu đáo.</span></div></div>
+              </div>
+              <a class="btn mt-4" href="visit.html" target="_blank"><i class="fa-solid fa-check"></i> Đăng ký tham quan</a>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="map" aria-label="Bản đồ đến trường">
+                <iframe title="Bản đồ Trường THPT Lê Quý Đôn" src="https://www.google.com/maps?q=125+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7,+Ph%C6%B0%E1%BB%9Dng+%C4%90a+Kao,+Qu%E1%BA%ADn+1,+TP.HCM&output=embed" width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section" aria-label="Câu hỏi thường gặp">
+        <h2>Câu hỏi thường gặp</h2>
+        <div class="faq mt-3">
+          <div class="faq-item">
+            <div class="faq-q">Thời hạn nộp hồ sơ là khi nào? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="mt-2">Nhà trường tiếp nhận hồ sơ quanh năm, riêng tuyển sinh chính thức diễn ra theo thông báo hằng năm của Sở GD&ĐT. Vui lòng đăng ký để nhận mốc thời gian cụ thể.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Có chương trình hỗ trợ học bổng không? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="mt-2">Trường có nhiều suất học bổng dựa trên thành tích học tập, năng khiếu và hoàn cảnh. Chuyên viên sẽ tư vấn tiêu chí chi tiết cho từng trường hợp.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Hình thức phỏng vấn/kiểm tra đầu vào gồm những gì? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="mt-2">Tuỳ khối lớp, học sinh có thể làm bài kiểm tra đánh giá năng lực các môn và phỏng vấn ngắn về mục tiêu học tập, hoạt động ngoại khoá.</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ====== Sticky quick help ====== -->
+  <div class="sticky-help" aria-label="Hỗ trợ nhanh">
+    <a class="btn-hotline" href="tel:+842838298976"><i class="fa-solid fa-phone"></i> Hotline: (028) 3829 8976</a>
+    <a class="btn-zalo" href="https://zalo.me" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-messenger"></i> Chat nhanh</a>
+  </div>
+
+  <!-- ====== Footer (giữ nguyên cấu trúc như site chính) ====== -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trường THPT Lê Quý Đôn</h3>
+          <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/truongthptlequydonq3tphcm" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.youtube.com/@TruonglequydonEduVn" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+            <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+            <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+            <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+            <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+            <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+            <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Giờ Mở Cửa</h3>
+          <ul>
+            <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+            <li>Thứ 7: 7:00 - 11:30</li>
+            <li>Chủ nhật: Nghỉ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
+    });
+
+    // Form submission (demo)
+    const form = document.getElementById('advisory-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('fullname').value.trim();
+      alert(`Cảm ơn ${name || 'bạn'} đã đăng ký! Chúng tôi sẽ liên hệ trong 24h làm việc.`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>

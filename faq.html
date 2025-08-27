@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQs - Trường THPT Lê Quý Đôn</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ============ Reset & Theme ============ */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-color:#1e3a8a; /* indigo-800 */
+      --secondary-color:#16a34a; /* green-600 */
+      --accent-color:#f59e0b; /* amber-500 */
+      --light-color:#f3f4f6; /* gray-100 */
+      --soft-light:#fafafa; /* white smoke */
+      --dark-color:#111827; /* gray-900 */
+      --muted:#6b7280; /* gray-500 */
+      --danger:#ef4444; /* red-500 */
+      --success:#10b981; /* emerald-500 */
+      --radius:14px;
+      --shadow-1:0 6px 24px rgba(0,0,0,.08);
+      --shadow-2:0 10px 30px rgba(30,58,138,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Be Vietnam Pro',sans-serif;color:#111827;background:#fff;line-height:1.6}
+    a{color:inherit}
+
+    /* ============ Layout Helpers ============ */
+    .container{width:92%;max-width:1200px;margin:0 auto}
+    .section{padding:2.5rem 0}
+    .kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+    .kicker i{font-size:.95rem;color:var(--accent-color)}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .75rem;border-radius:999px;background:var(--light-color);color:#374151;font-weight:600;font-size:.85rem}
+
+    /* ============ Header ============ */
+    header{background:var(--primary-color);color:#fff;padding:1rem 0;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    .header-content{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .logo{display:flex;align-items:center;gap:.75rem}
+    .logo img{height:50px}
+    .logo h1{font-size:1.5rem;font-weight:700;white-space:nowrap}
+    nav ul{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:500;display:inline-block}
+    nav a:hover{color:var(--accent-color)}
+
+    /* ============ Hero ============ */
+    .pad-top{padding-top:96px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
+    .hero-card{
+      background:radial-gradient(1200px 400px at -10% -50%, #2d4ba8 10%, transparent 70%),linear-gradient(135deg,var(--primary-color),#2d4ba8);
+      color:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-2)
+    }
+    .hero h1{font-size:2.25rem;line-height:1.2;margin:.5rem 0 1rem}
+    .hero p{font-size:1.05rem;color:#e5e7eb}
+    .hero-actions{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{appearance:none;border:0;outline:0;cursor:pointer;border-radius:12px;padding:.9rem 1.1rem;font-weight:600}
+    .btn-primary{background:#fff;color:var(--primary-color)}
+    .btn-primary:hover{filter:brightness(0.98)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.35);color:#fff}
+    .btn-ghost:hover{border-color:#fff}
+    .hero-media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-2);position:relative}
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+    .hero-stats{position:absolute;inset:auto 12px 12px auto;background:rgba(255,255,255,.95);color:#111827;border-radius:12px;padding:.65rem .9rem;box-shadow:var(--shadow-1);font-size:.9rem}
+
+    /* ============ FAQ Layout ============ */
+    .faq-layout{display:grid;grid-template-columns:320px 1fr;gap:2rem}
+
+    /* Sidebar */
+    .sidebar{position:sticky;top:100px;align-self:start}
+    .side-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:var(--shadow-1);padding:1rem}
+    .search{display:flex;align-items:center;gap:.5rem;background:var(--soft-light);border:1px solid #e5e7eb;border-radius:12px;padding:.6rem .75rem;margin-bottom:.75rem}
+    .search input{border:0;background:transparent;outline:0;width:100%;font:inherit}
+    .side-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin:.25rem 0 .75rem}
+    .mini-btn{padding:.5rem .6rem;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;font-weight:600;font-size:.85rem}
+    .mini-btn:hover{border-color:var(--primary-color)}
+    .toc{display:grid;gap:.35rem;max-height:60vh;overflow:auto;scrollbar-width:thin}
+    .toc a{display:flex;gap:.5rem;align-items:flex-start;text-decoration:none;border-radius:10px;padding:.5rem .6rem;color:#111827;border:1px solid transparent}
+    .toc a small{color:var(--muted)}
+    .toc a:hover{background:var(--soft-light)}
+    .toc a.active{border-color:var(--primary-color);background:#eef2ff}
+    .toc .cat{margin:.65rem 0 .35rem .2rem;color:#374151;font-weight:700;font-size:.9rem}
+
+    /* Content */
+    .faq-list{display:grid;gap:1rem}
+    .faq-item{background:#fff;border:1px solid #e5e7eb;border-left:4px solid #e5e7eb;border-radius:14px;box-shadow:var(--shadow-1)}
+    .faq-item.highlight{animation:pulse 1s ease 1}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,58,138,.3)}100%{box-shadow:0 0 0 12px rgba(30,58,138,0)}}
+
+    details{border-radius:14px}
+    summary{list-style:none;cursor:pointer;padding:1rem 1rem 1rem 1.25rem;display:flex;align-items:start;gap:.75rem}
+    summary::-webkit-details-marker{display:none}
+    .q-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:999px;background:#eef2ff;color:var(--primary-color);flex:0 0 28px;margin-top:.15rem}
+    .q-title{font-weight:700;color:#111827}
+    .q-tools{margin-left:auto;display:flex;gap:.4rem}
+    .tool-btn{border:1px solid #e5e7eb;background:#fff;border-radius:10px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer}
+    .tool-btn:hover{border-color:var(--primary-color)}
+
+    .answer{padding:0 1rem 1rem 3.25rem;color:#374151}
+    .answer p{margin:.35rem 0}
+    .muted{color:var(--muted)}
+    .badge{background:#eef2ff;color:#1e3a8a}
+
+    /* Floating back-to-top */
+    .to-top{position:fixed;right:20px;bottom:20px;z-index:999;background:#111827;color:#fff;border:0;border-radius:999px;width:44px;height:44px;display:grid;place-items:center;box-shadow:var(--shadow-2);cursor:pointer;opacity:0;pointer-events:none;transition:.2s}
+    .to-top.show{opacity:1;pointer-events:auto}
+
+    /* Footer */
+    footer{background:#111827;color:#fff;padding:3rem 0 1rem;margin-top:2rem}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
+    .footer-column h3{font-size:1.2rem;margin-bottom:1.5rem;color:var(--accent-color)}
+    .footer-column ul{list-style:none}
+    .footer-column li{margin-bottom:.8rem}
+    .footer-column a{color:#ddd;text-decoration:none}
+    .footer-column a:hover{color:var(--accent-color)}
+    .social-links{display:flex;gap:1rem;margin-top:1rem}
+    .social-links a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+    .social-links a:hover{background:var(--accent-color);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .header-content{flex-direction:column}
+      nav ul{justify-content:center}
+      .hero{grid-template-columns:1fr}
+      .faq-layout{grid-template-columns:1fr}
+      .sidebar{position:static}
+    }
+    @media (max-width: 520px){
+      .logo{flex-direction:column;text-align:center}
+      .logo h1{font-size:1.25rem}
+      nav ul{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- ================= Header ================= -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img alt="Logo Trường Lê Quý Đôn" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJsMTAgNi41NzZMMjIgMTQuNTg1djMuNzIxTDEyIDIyIDIgMTguMzA2di0zLjcyMUwyIDguNTc2TDEyIDJaIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMCAyIDB2Ny4zNTZhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwLTkuMzEyYzAtMS4yMy0uODc5LTIuMDUyLTItMi4wNTJzLTIgLjgyMy0yIDIuMDUyYTQ2NS40NyA0NjUuNDcgMCAwIDAgMCA5LjMxMlYxMmEyIDIgMCAwIDAgMi0yeiIvPjwvc3ZnPg=="/>
+          <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+        </div>
+        <nav aria-label="Điều hướng chính">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="index.html#about">Our School</a></li>
+            <li><a href="index.html#admission">Tuyển Sinh</a></li>
+            <li><a href="index.html#academics">Học Thuật</a></li>
+            <li><a href="index.html#student-life">Đời Sống Học Đường</a></li>
+            <li><a href="applying.html">Nộp Hồ Sơ</a></li>
+            <li><a href="faq.html" aria-current="page" style="color:#fbbf24;font-weight:700">FAQ</a></li>
+            <li><a href="index.html#contact">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pad-top">
+    <!-- ================= Hero ================= -->
+    <section class="section">
+      <div class="container hero">
+        <div class="hero-card">
+          <span class="kicker"><i class="fa-solid fa-circle-question"></i> Câu hỏi thường gặp</span>
+          <h1>Frequently Asked Questions</h1>
+          <p>Giải đáp nhanh các thắc mắc phổ biến về tuyển sinh, chương trình học, đời sống học đường… Bạn có thể <strong>tìm kiếm</strong>, <strong>nhấp câu hỏi để mở</strong> hoặc <strong>chọn từ danh sách bên trái</strong> để cuộn tới câu trả lời.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#faqs"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Tìm câu trả lời ngay</a>
+            <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-headset"></i>&nbsp;Liên hệ tư vấn</a>
+          </div>
+        </div>
+        <figure class="hero-media" aria-label="Ảnh khuôn viên trường">
+          <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1600&auto=format&fit=crop" alt="Thư viện/không gian học tập hiện đại" loading="lazy">
+          <figcaption class="hero-stats badge"><i class="fa-solid fa-bolt"></i> Tìm nhanh • Dễ dùng • Hỗ trợ 24/7</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= FAQ Section ================= -->
+    <section id="faqs" class="section" style="background:var(--soft-light)">
+      <div class="container faq-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="side-card">
+            <div class="search" role="search">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input id="faqSearch" type="search" placeholder="Tìm theo từ khóa…" aria-label="Tìm câu hỏi" />
+            </div>
+            <div class="side-actions">
+              <button id="expandAll" class="mini-btn" aria-label="Mở tất cả"><i class="fa-regular fa-square-plus"></i> Mở tất cả</button>
+              <button id="collapseAll" class="mini-btn" aria-label="Thu gọn tất cả"><i class="fa-regular fa-square-minus"></i> Thu gọn</button>
+              <button id="clearSearch" class="mini-btn" aria-label="Xóa tìm kiếm"><i class="fa-solid fa-eraser"></i> Xóa</button>
+            </div>
+            <div id="toc" class="toc" aria-label="Danh sách câu hỏi"></div>
+          </div>
+        </aside>
+
+        <!-- Content -->
+        <div>
+          <div class="kicker"><i class="fa-solid fa-list-check"></i> Danh sách câu hỏi</div>
+          <div class="faq-list" id="faqList">
+
+            <!-- Admissions -->
+            <article class="faq-item" id="q-deadline" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-calendar-check"></i></span>
+                  <span class="q-title">Có hạn chót nộp hồ sơ không?</span>
+                  <span class="q-tools">
+                    <button class="tool-btn copy" title="Sao chép liên kết" aria-label="Sao chép liên kết"><i class="fa-solid fa-link"></i></button>
+                  </span>
+                </summary>
+                <div class="answer">
+                  <p>Nhà trường áp dụng <strong>xét tuyển theo đợt (rolling admissions)</strong>; tuy nhiên <strong>số lượng chỗ có hạn</strong>. Thí sinh dự định nhập học vào <strong>tháng 8</strong> nên bắt đầu quy trình từ <strong>tháng 1</strong> của năm đó. Hồ sơ được tiếp nhận trong suốt năm học và kết quả phụ thuộc vào tình trạng chỗ trống.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-timeline" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-regular fa-clock"></i></span>
+                  <span class="q-title">Quy trình tuyển sinh mất bao lâu?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết" aria-label="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Chúng tôi cố gắng phản hồi <strong>nhanh chóng</strong> ngay sau khi <strong>đủ hồ sơ</strong> được cung cấp cho Phòng Tuyển sinh và các <strong>bài đánh giá bắt buộc</strong> được hoàn tất.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-testing" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-pen-to-square"></i></span>
+                  <span class="q-title">Có bắt buộc kiểm tra/đánh giá khi xét tuyển không?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết" aria-label="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Tất cả thí sinh đều cần <strong>đánh giá nội bộ</strong> hoặc nộp <strong>kết quả bài thi chuẩn hóa</strong> còn hiệu lực <strong>không quá một năm học</strong>. Chi tiết bài kiểm tra xem tại mục <span class="badge">Nộp hồ sơ</span>.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-applyfee" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-receipt"></i></span>
+                  <span class="q-title">Phí xét tuyển đóng như thế nào?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Sau khi gửi đơn, hệ thống sẽ gửi <strong>hướng dẫn chuyển khoản</strong> cùng <strong>mã tham chiếu</strong>. Vui lòng hoàn tất trước khi đặt lịch đánh giá.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-no-ielts" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-language"></i></span>
+                  <span class="q-title">Chưa có chứng chỉ tiếng Anh thì sao?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Không bắt buộc. Nhà trường tổ chức <strong>bài đánh giá tiếng Anh nội bộ</strong> để xác định mức độ hiện tại của học sinh.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-dorm" data-category="Tuyển sinh">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-house-user"></i></span>
+                  <span class="q-title">Nhà trường có hỗ trợ ký túc xá không?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Nhà trường có khu <strong>ký túc xá cho học sinh ở xa</strong>. Vui lòng ghi chú trong đơn để được hướng dẫn thủ tục.</p>
+                </div>
+              </details>
+            </article>
+
+            <!-- School Life -->
+            <article class="faq-item" id="q-hours" data-category="Đời sống học đường">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-clock"></i></span>
+                  <span class="q-title">Giờ học như thế nào?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Học sinh học từ <strong>8:00 – 15:00</strong>, <strong>thứ Hai – thứ Sáu</strong>. Sau 15:00 có nhiều hoạt động <strong>thể thao, câu lạc bộ</strong> và <strong>chương trình sau giờ học</strong> (tự chọn).</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-bus" data-category="Đời sống học đường">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-bus"></i></span>
+                  <span class="q-title">Học sinh ở đâu & có xe đưa đón không?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Hơn <strong>80%</strong> học sinh cư trú tại <strong>Quận 7</strong>. Nhà trường có <strong>dịch vụ xe buýt đưa đón</strong> (có thu phí) đến hầu hết các quận trong TP.HCM.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-lunch" data-category="Đời sống học đường">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-utensils"></i></span>
+                  <span class="q-title">Có cung cấp bữa trưa không?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Trường cung cấp <strong>bữa phụ buổi sáng</strong> cho khối THCS/THPT và <strong>suất ăn trưa nóng</strong> cho toàn trường do đối tác <strong>Aden</strong> vận hành (cafeteria & kiosk). <em>Thực đơn và biểu phí</em> được công bố trên cổng thông tin của nhà cung cấp. Học sinh có thể <strong>mang cơm nhà</strong>; có <strong>lò vi sóng</strong> để hâm nóng.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-uniform" data-category="Đời sống học đường">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-shirt"></i></span>
+                  <span class="q-title">Học sinh có mặc đồng phục không?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Có. <strong>Đồng phục</strong> được bán tại <strong>cửa hàng trường</strong>. Trong năm học, thỉnh thoảng có <strong>ngày chủ đề</strong> (dress day).</p>
+                </div>
+              </details>
+            </article>
+
+            <!-- Academics & Faculty -->
+            <article class="faq-item" id="q-teachers-from" data-category="Giáo viên & Học thuật">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-globe"></i></span>
+                  <span class="q-title">Giáo viên đến từ đâu?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Đội ngũ giáo viên đến từ <strong>25 quốc gia</strong>, trong đó phần lớn đến từ <strong>Mỹ</strong> và <strong>Canada</strong>, mang lại môi trường học tập đa văn hóa.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-teachers-qual" data-category="Giáo viên & Học thuật">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                  <span class="q-title">Trình độ/kinh nghiệm của giáo viên?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Hơn <strong>70%</strong> giáo viên có <strong>bằng thạc sĩ</strong> và <strong>trung bình 18 năm kinh nghiệm</strong>. Giáo viên phải có <strong>chứng chỉ/giấy phép hành nghề</strong> tại nước sở tại.</p>
+                </div>
+              </details>
+            </article>
+
+            <article class="faq-item" id="q-nationality" data-category="Giáo viên & Học thuật">
+              <details>
+                <summary>
+                  <span class="q-icon"><i class="fa-solid fa-people-group"></i></span>
+                  <span class="q-title">Cơ cấu quốc tịch học sinh?</span>
+                  <span class="q-tools"><button class="tool-btn copy" title="Sao chép liên kết"><i class="fa-solid fa-link"></i></button></span>
+                </summary>
+                <div class="answer">
+                  <p>Trường có <strong>1500+</strong> học sinh đến từ <strong>48+ quốc tịch</strong>. Chính sách <strong>giới hạn tỉ lệ quốc tịch</strong> giúp duy trì <strong>đa dạng</strong> và trải nghiệm quốc tế chân thực trong lớp học.</p>
+                </div>
+              </details>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trường THPT Lê Quý Đôn</h3>
+          <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+            <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+            <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+            <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+            <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+            <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+            <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Giờ Mở Cửa</h3>
+          <ul>
+            <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+            <li>Thứ 7: 7:00 - 11:30</li>
+            <li>Chủ nhật: Nghỉ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Scripts ================= -->
+  <button id="toTop" class="to-top" aria-label="Về đầu trang"><i class="fa-solid fa-arrow-up"></i></button>
+  <script>
+    // Smooth navigation for header links
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if (!href) return;
+        if (href.startsWith('index.html')){ e.preventDefault(); window.location.href = href; return; }
+        if (href.startsWith('#')){ e.preventDefault(); const el=document.querySelector(href); if (el){ window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});} }
+      });
+    });
+
+    // Build TOC from FAQ items
+    const faqItems = [...document.querySelectorAll('.faq-item')];
+    const toc = document.getElementById('toc');
+    const groups = {};
+    faqItems.forEach(item=>{
+      const cat = item.dataset.category || 'Khác';
+      const title = item.querySelector('.q-title').textContent.trim();
+      const id = item.id;
+      if(!groups[cat]) groups[cat] = [];
+      groups[cat].push({title,id});
+    });
+    Object.entries(groups).forEach(([cat,items])=>{
+      const h = document.createElement('div'); h.className='cat'; h.textContent=cat; toc.appendChild(h);
+      items.forEach(({title,id})=>{
+        const a=document.createElement('a'); a.href = `#${id}`; a.dataset.target = id; a.innerHTML = `<i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>${title}</span>`; toc.appendChild(a);
+      });
+    });
+
+    // Smooth scroll + open details + highlight + update hash without default jump
+    toc.addEventListener('click', (e)=>{
+      const link = e.target.closest('a'); if(!link) return; e.preventDefault();
+      const id = link.dataset.target; const el = document.getElementById(id);
+      if(!el) return;
+      const details = el.querySelector('details'); details.open = true;
+      window.history.replaceState(null, '', `#${id}`);
+      window.scrollTo({top:el.getBoundingClientRect().top + window.scrollY - 90, behavior:'smooth'});
+      el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'), 1000);
+    });
+
+    // Scrollspy
+    const tocLinks = [...toc.querySelectorAll('a[data-target]')];
+    const byId = Object.fromEntries(tocLinks.map(a=>[a.dataset.target,a]));
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id = entry.target.id; tocLinks.forEach(a=>a.classList.toggle('active', a.dataset.target===id));
+        }
+      })
+    }, {rootMargin:'-40% 0px -55% 0px', threshold: [0,1]});
+    faqItems.forEach(el=>spy.observe(el));
+
+    // Expand/Collapse All
+    const expandAllBtn = document.getElementById('expandAll');
+    const collapseAllBtn = document.getElementById('collapseAll');
+    expandAllBtn.addEventListener('click',()=>{ document.querySelectorAll('.faq-item details').forEach(d=>d.open=true); });
+    collapseAllBtn.addEventListener('click',()=>{ document.querySelectorAll('.faq-item details').forEach(d=>d.open=false); });
+
+    // Copy deep link for each question
+    document.querySelectorAll('.tool-btn.copy').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const article = e.target.closest('article.faq-item');
+        const url = `${location.origin}${location.pathname}#${article.id}`;
+        navigator.clipboard?.writeText(url).then(()=>{
+          btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+          setTimeout(()=>btn.innerHTML = '<i class="fa-solid fa-link"></i>', 1200);
+        });
+      });
+    });
+
+    // Search filter (title + answer text)
+    const search = document.getElementById('faqSearch');
+    const clearBtn = document.getElementById('clearSearch');
+    function normalize(s){return s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');}
+    function filterFAQs(){
+      const q = normalize(search.value.trim());
+      faqItems.forEach(item=>{
+        const text = normalize(item.textContent);
+        const match = !q || text.includes(q);
+        item.style.display = match ? '' : 'none';
+        const link = byId[item.id];
+        if(link) link.style.display = match ? '' : 'none';
+      });
+    }
+    search.addEventListener('input', filterFAQs);
+    clearBtn.addEventListener('click', ()=>{ search.value=''; filterFAQs(); search.focus(); });
+
+    // Back to Top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll',()=>{ toTop.classList.toggle('show', window.scrollY > 400); });
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // If landing with a hash, open the corresponding details
+    window.addEventListener('load', ()=>{
+      if(location.hash){ const el = document.querySelector(location.hash); if(el){ el.querySelector('details').open = true; el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'), 1000);} }
+    });
+  </script>
+</body>
+</html>

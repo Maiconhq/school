@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nộp Hồ Sơ Nhập Học - Trường THPT Lê Quý Đôn</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ============ Reset & Theme ============ */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-color:#1e3a8a;
+      --secondary-color:#16a34a;
+      --accent-color:#f59e0b;
+      --light-color:#f3f4f6;
+      --soft-light:#fafafa;
+      --dark-color:#1f2937;
+      --muted:#6b7280;
+      --danger:#ef4444;
+      --success:#10b981;
+      --radius:14px;
+      --shadow-1:0 6px 24px rgba(0,0,0,.08);
+      --shadow-2:0 10px 30px rgba(30,58,138,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Be Vietnam Pro',sans-serif;color:#111827;background:#fff;line-height:1.6}
+
+    /* ============ Layout Helpers ============ */
+    .container{width:90%;max-width:1200px;margin:0 auto}
+    .section{padding:2.5rem 0}
+    .kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+    .kicker i{font-size:.95rem;color:var(--accent-color)}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .75rem;border-radius:999px;background:var(--light-color);color:#374151;font-weight:600;font-size:.85rem}
+
+    /* ============ Header (kept) ============ */
+    header{background:var(--primary-color);color:#fff;padding:1rem 0;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    .header-content{display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:.75rem}
+    .logo img{height:50px}
+    .logo h1{font-size:1.5rem;font-weight:700;white-space:nowrap}
+    nav ul{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:500;display:inline-block}
+    nav a:hover{color:var(--accent-color)}
+    /* Mobile nav (simple) */
+    .menu-toggle{display:none}
+
+    /* ============ Hero ============ */
+    .pad-top{padding-top:96px} /* offset fixed header */
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
+    .hero-card{
+      background:linear-gradient(135deg,var(--primary-color),#2d4ba8);
+      color:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-2)
+    }
+    .hero h1{font-size:2.25rem;line-height:1.2;margin:.5rem 0 1rem}
+    .hero p{font-size:1.05rem;color:#e5e7eb}
+    .hero-actions{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{appearance:none;border:0;outline:0;cursor:pointer;border-radius:12px;padding:.9rem 1.1rem;font-weight:600}
+    .btn-primary{background:#fff;color:var(--primary-color)}
+    .btn-primary:hover{filter:brightness(0.98)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.35);color:#fff}
+    .btn-ghost:hover{border-color:#fff}
+    .hero-media{
+      border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-2);position:relative
+    }
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block;min-height:260px}
+    .hero-stats{
+      position:absolute;inset:auto 12px 12px auto;background:rgba(255,255,255,.95);
+      color:#111827;border-radius:12px;padding:.65rem .9rem;box-shadow:var(--shadow-1);font-size:.9rem
+    }
+
+    /* ============ Section: Process ============ */
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:1.25rem}
+    .section-head h2{font-size:1.75rem;color:var(--primary-color)}
+    .tabs{
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.75rem
+    }
+    .tab{
+      background:var(--soft-light);border:1px solid #e5e7eb;border-radius:14px;padding:1.1rem 1.25rem;cursor:pointer;
+      display:flex;align-items:center;gap:.75rem;font-weight:600;color:#111827;transition:.2s
+    }
+    .tab i{color:var(--primary-color)}
+    .tab[aria-selected="true"]{background:#fff;border-color:var(--primary-color);box-shadow:var(--shadow-1)}
+    .tab[aria-selected="true"] i{color:var(--secondary-color)}
+    .tabpanels{margin-top:1.25rem}
+    .tabpanel{display:none}
+    .tabpanel.active{display:block}
+    .panel-wrap{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start
+    }
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:var(--shadow-1)}
+    .card-body{padding:1.25rem 1.25rem}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .step{background:var(--light-color);border-radius:12px;padding:1rem}
+    .step .num{width:34px;height:34px;border-radius:999px;background:#fff;border:2px solid var(--primary-color);
+      display:grid;place-items:center;font-weight:700;color:var(--primary-color);margin-bottom:.5rem}
+    .muted{color:var(--muted)}
+    .fee{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+    .fee .price{font-weight:800;color:var(--primary-color)}
+    .divider{height:1px;background:#e5e7eb;margin:1rem 0}
+
+    .grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .grade{border-left:4px solid var(--primary-color);background:#fff;border-radius:12px;box-shadow:var(--shadow-1)}
+    .grade .g-body{padding:1rem 1rem}
+    .grade h4{color:var(--primary-color);margin-bottom:.4rem}
+
+    .decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .decision{border-radius:14px;border:1px solid #e5e7eb;background:#fff;box-shadow:var(--shadow-1)}
+    .decision .d-head{display:flex;align-items:center;gap:.6rem;padding:1rem 1rem .25rem 1rem}
+    .decision .d-head i{font-size:1.1rem}
+    .decision .d-body{padding:0 1rem 1rem 1rem}
+    .tag-ok{color:var(--success)}
+    .tag-wait{color:#f59e0b}
+    .tag-no{color:var(--danger)}
+
+    /* ============ Section: Quick Apply ============ */
+    .apply{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem}
+    .small{font-size:.92rem}
+    .form{display:grid;gap:.85rem}
+    .field{display:grid;gap:.35rem}
+    .field label{font-weight:600;color:#374151}
+    .field input,.field select,.field textarea{
+      border:1.5px solid #e5e7eb;border-radius:12px;padding:.85rem .9rem;font:inherit;outline:none;background:#fff
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary-color);box-shadow:0 0 0 4px rgba(30,58,138,.1)}
+    .hint{color:var(--muted);font-size:.85rem}
+    .inline{display:flex;gap:.75rem;flex-wrap:wrap}
+    .notice{background:#fef3c7;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:.75rem .9rem}
+
+    /* ============ FAQs ============ */
+    .faq{display:grid;gap:.75rem}
+    .faq-item{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+    .faq-q{background:#fff;padding:1rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .faq-a{padding:0 1rem;max-height:0;overflow:hidden;background:var(--soft-light);transition:max-height .25s ease}
+    .faq-item.active .faq-a{padding:1rem;max-height:300px}
+
+    /* ============ Footer (kept) ============ */
+    footer{background:var(--dark-color);color:#fff;padding:3rem 0 1rem;margin-top:2rem}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
+    .footer-column h3{font-size:1.2rem;margin-bottom:1.5rem;color:var(--accent-color)}
+    .footer-column ul{list-style:none}
+    .footer-column li{margin-bottom:.8rem}
+    .footer-column a{color:#ddd;text-decoration:none}
+    .footer-column a:hover{color:var(--accent-color)}
+    .social-links{display:flex;gap:1rem;margin-top:1rem}
+    .social-links a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+    .social-links a:hover{background:var(--accent-color);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+
+    /* ============ Responsive ============ */
+    @media (max-width: 992px){
+      .header-content{flex-direction:column;gap:.75rem}
+      nav ul{justify-content:center}
+      .hero{grid-template-columns:1fr}
+      .panel-wrap,.apply{grid-template-columns:1fr}
+      .tabs{grid-template-columns:1fr;gap:.5rem}
+    }
+    @media (max-width: 520px){
+      .logo{flex-direction:column;text-align:center}
+      .logo h1{font-size:1.25rem}
+      nav ul{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- ================= Header (kept) ================= -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Rya2UtbGluZWNhcD0icm91bmQiIHN0cmlrZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAybDEwIDYuNTc2TDIyIDE0LjU4NXYzLjcyMUwxMiAyMiAyIDE4LjMwNnYtMy43MjFMMiA4LjU3NkwxMiAyWiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMmEyIDIgMCAwIDAgMiAwdjcuMzU2YTQ2NS40NyA0NjUuNDcgMCAwIDAgMC05LjMxMmMwLTEuMjMtLjg3OS0yLjA1Mi0yLTIuMDUycy0yIC44MjMtMiAyLjA1MmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAgOS4zMTJWMTJhMiAyIDAgMCAwIDItMnoiPjwvcGF0aD48L3N2Zz4=" alt="Logo Trường Lê Quý Đôn">
+          <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+        </div>
+        <nav aria-label="Điều hướng chính">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="index.html#about">Our School</a></li>
+            <li><a href="index.html#admission">Tuyển Sinh</a></li>
+            <li><a href="index.html#academics">Học Thuật</a></li>
+            <li><a href="index.html#student-life">Đời Sống Học Đường</a></li>
+            <li><a href="applying.html" aria-current="page" style="color:#fbbf24;font-weight:700">Nộp Hồ Sơ</a></li>
+            <li><a href="index.html#contact">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pad-top">
+    <!-- ================= Hero ================= -->
+    <section class="section">
+      <div class="container hero">
+        <div class="hero-card">
+          <span class="kicker"><i class="fa-solid fa-file-signature"></i> Tuyển sinh năm học mới</span>
+          <h1>Nộp hồ sơ nhập học</h1>
+          <p>
+            Hành trình trở thành học sinh <strong>Lê Quý Đôn</strong> bắt đầu từ hôm nay!
+            Chúng tôi rất vui vì bạn đang cân nhắc lựa chọn nhà trường.
+            Đội ngũ tuyển sinh luôn sẵn sàng đồng hành và hỗ trợ gia đình trong suốt quá trình nộp hồ sơ.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#apply-now"><i class="fa-solid fa-rocket"></i>&nbsp;Bắt đầu nộp hồ sơ</a>
+            <a class="btn btn-ghost" href="#process"><i class="fa-regular fa-circle-question"></i>&nbsp;Tìm hiểu quy trình</a>
+          </div>
+        </div>
+        <figure class="hero-media" aria-label="Ảnh khuôn viên trường">
+          <img src="https://www.baolongan.vn/image/news/2016/20160229/fckimage/03.jpg" alt="Khuôn viên trường – THPT Lê Quý Đôn">
+          <figcaption class="hero-stats badge"><i class="fa-solid fa-school"></i> Môi trường học tập an toàn & hiện đại</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= Application Process (2 categories horizontal) ================= -->
+    <section id="process" class="section" aria-labelledby="process-title" style="background:var(--soft-light)">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><i class="fa-solid fa-list-check"></i> Quy trình tuyển sinh</span>
+            <h2 id="process-title">Application Process</h2>
+            <p class="muted">Hai nhóm thông tin chính: <strong>Quy trình & Đánh giá</strong> • <strong>Kết quả xét tuyển</strong></p>
+          </div>
+          <span class="badge"><i class="fa-solid fa-money-check-alt"></i> Phí xét tuyển: <strong>10.000.000&nbsp;VND</strong></span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs" role="tablist" aria-label="Nhóm nội dung quy trình">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="tab-proc" id="tab-btn-proc">
+            <i class="fa-solid fa-clipboard-check"></i> Quy trình & Đánh giá
+          </button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-dec" id="tab-btn-dec">
+            <i class="fa-solid fa-flag-checkered"></i> Kết quả xét tuyển
+          </button>
+        </div>
+
+        <div class="tabpanels">
+          <!-- Category 1 -->
+          <section id="tab-proc" class="tabpanel active" role="tabpanel" aria-labelledby="tab-btn-proc">
+            <div class="panel-wrap">
+              <!-- Steps -->
+              <article class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.75rem">Các bước cần thực hiện</h3>
+                  <div class="steps">
+                    <div class="step">
+                      <div class="num">1</div>
+                      <h4>Hoàn tất đơn trên hệ thống</h4>
+                      <p class="muted">Hồ sơ cần <strong>đủ tài liệu bắt buộc</strong> (thông tin cá nhân, học bạ, giấy tờ kèm theo) để được đưa vào vòng xét.</p>
+                    </div>
+                    <div class="step">
+                      <div class="num">2</div>
+                      <h4>Phỏng vấn & sàng lọc</h4>
+                      <p class="muted">Tất cả thí sinh tham gia phỏng vấn và đánh giá. <span class="fee"><i class="fa-solid fa-receipt"></i> Phí xét tuyển: <span class="price">10.000.000&nbsp;VND</span> — cần thanh toán <strong>trước</strong> khi đặt lịch đánh giá.</span></p>
+                    </div>
+                  </div>
+
+                  <div class="divider"></div>
+
+                  <h3 style="color:var(--primary-color);margin-bottom:.5rem">Nội dung đánh giá theo khối lớp</h3>
+                  <p class="muted small" style="margin-bottom:.75rem">Áp dụng cho tuyển sinh vào các khối 10–12. Nếu cần, thí sinh có thể được mời tham gia vòng bổ sung để xác định rõ hơn năng lực tiếng Anh.</p>
+
+                  <div class="grades">
+                    <div class="grade">
+                      <div class="g-body">
+                        <h4><i class="fa-solid fa-book-open"></i> Lớp 10</h4>
+                        <p class="muted">Đánh giá nền tảng học thuật: <strong>Toán</strong>, <strong>Ngữ văn</strong> và mức độ <strong>tiếng Anh</strong> (viết & hiểu). Mục tiêu là xác định mức đầu vào phù hợp.</p>
+                      </div>
+                    </div>
+                    <div class="grade">
+                      <div class="g-body">
+                        <h4><i class="fa-solid fa-flask"></i> Lớp 11</h4>
+                        <p class="muted">Sàng lọc học thuật nâng cao: <strong>Toán</strong>, <strong>tiếng Anh</strong> (viết & đọc hiểu) và tổng quan kết quả học tập gần nhất để bảo đảm theo kịp chương trình.</p>
+                      </div>
+                    </div>
+                    <div class="grade">
+                      <div class="g-body">
+                        <h4><i class="fa-solid fa-graduation-cap"></i> Lớp 12</h4>
+                        <p class="muted">Xem xét <strong>học bạ</strong>, định hướng tốt nghiệp, phỏng vấn học thuật; đánh giá <strong>tiếng Anh</strong> và <strong>Toán</strong> nhằm đảm bảo yêu cầu đầu ra & kế hoạch dự thi.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Helpful box -->
+              <aside class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.5rem"><i class="fa-regular fa-lightbulb"></i> Gợi ý chuẩn bị hồ sơ</h3>
+                  <ul class="muted small" style="margin-left:1rem;display:grid;gap:.4rem;margin-top:.4rem">
+                    <li>Ảnh 3x4, CCCD (nếu có), sổ hộ khẩu/giấy xác nhận cư trú.</li>
+                    <li>Học bạ THCS/THPT, giấy khen, chứng chỉ liên quan.</li>
+                    <li>Phiếu sức khỏe trong vòng 6 tháng gần nhất.</li>
+                    <li>Minh chứng năng lực tiếng Anh (nếu có): IELTS/TOEFL/…</li>
+                  </ul>
+                  <div class="divider"></div>
+                  <p class="notice small"><i class="fa-solid fa-circle-info"></i> Sau khi nộp đơn, bạn sẽ nhận email xác nhận và hướng dẫn đóng phí xét tuyển cũng như đặt lịch đánh giá.</p>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <!-- Category 2 -->
+          <section id="tab-dec" class="tabpanel" role="tabpanel" aria-labelledby="tab-btn-dec">
+            <div class="panel-wrap">
+              <article class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.75rem">Nguyên tắc xét tuyển</h3>
+                  <p class="muted">Mọi quyết định dựa trên việc xem xét kỹ <strong>học bạ</strong>, <strong>kết quả đánh giá</strong>, <strong>mức độ tiếng Anh</strong> và khả năng nhà trường <strong>đáp ứng nhu cầu học tập</strong> của học sinh trong khuôn khổ chương trình hiện có.</p>
+
+                  <div class="divider"></div>
+
+                  <h3 style="color:var(--primary-color);margin-bottom:.75rem">Ba kết quả có thể xảy ra</h3>
+                  <div class="decisions">
+                    <div class="decision">
+                      <div class="d-head tag-ok"><i class="fa-solid fa-circle-check"></i> <strong>Trúng tuyển (Acceptance)</strong></div>
+                      <div class="d-body muted small">
+                        Nếu đạt yêu cầu và còn chỉ tiêu, phụ huynh sẽ nhận <strong>thư báo trúng tuyển</strong>. Vui lòng ký xác nhận, hoàn thành <strong>phiếu sức khỏe</strong> và đóng học phí trước ngày nhập học. Học sinh sẽ làm việc với <strong>cố vấn học tập</strong> trước khi vào lớp.
+                      </div>
+                    </div>
+                    <div class="decision">
+                      <div class="d-head tag-wait"><i class="fa-solid fa-clock"></i> <strong>Danh sách chờ (Waitlisted)</strong></div>
+                      <div class="d-body muted small">
+                        Hồ sơ đạt yêu cầu nhưng <strong>hết chỗ</strong> tại khối lớp đăng ký sẽ được đưa vào <strong>danh sách chờ</strong>. Nhà trường liên hệ khi có chỗ trống phù hợp.
+                      </div>
+                    </div>
+                    <div class="decision">
+                      <div class="d-head tag-no"><i class="fa-solid fa-circle-xmark"></i> <strong>Không đạt (Denial)</strong></div>
+                      <div class="d-body muted small">
+                        Hồ sơ có thể không được chấp nhận do <strong>kết quả học thuật/hạnh kiểm</strong> chưa đáp ứng, <strong>năng lực tiếng Anh</strong> chưa phù hợp yêu cầu khối lớp, hoặc nhà trường <strong>chưa có chương trình đáp ứng</strong> nhu cầu học tập chuyên biệt.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <aside class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.5rem"><i class="fa-solid fa-envelope-open-text"></i> Thời gian phản hồi</h3>
+                  <p class="muted small">Kết quả dự kiến được gửi qua email sau khi hoàn tất đầy đủ các bước và nhà trường nhận đủ hồ sơ, lệ phí.</p>
+                  <div class="divider"></div>
+                  <p class="small"><span class="badge"><i class="fa-solid fa-phone-volume"></i> Cần hỗ trợ?</span></p>
+                  <p class="muted small" style="margin-top:.4rem">Phòng Tuyển sinh: (028) 3829 8976 • <a href="mailto:admissions@lequydon.edu.vn">admissions@lequydon.edu.vn</a></p>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Quick Apply / Form ================= -->
+    <section id="apply-now" class="section">
+      <div class="container apply">
+        <div>
+          <span class="kicker"><i class="fa-solid fa-rocket"></i> Bắt đầu hồ sơ trực tuyến</span>
+          <h2 style="color:var(--primary-color);margin-bottom:.5rem">Nộp hồ sơ online</h2>
+          <p class="muted" style="margin-bottom:1rem">Điền thông tin cơ bản để chúng tôi liên hệ và hướng dẫn nộp hồ sơ chi tiết. Bạn có thể lưu bản nháp và bổ sung tài liệu sau.</p>
+          <form class="form" id="apply-form" novalidate>
+            <div class="inline">
+              <div class="field" style="flex:1 1 260px">
+                <label for="parentName">Họ tên phụ huynh</label>
+                <input id="parentName" name="parentName" type="text" required placeholder="Nguyễn Văn A"/>
+              </div>
+              <div class="field" style="flex:1 1 260px">
+                <label for="phone">Số điện thoại</label>
+                <input id="phone" name="phone" type="tel" required placeholder="09xx xxx xxx"/>
+              </div>
+            </div>
+
+            <div class="inline">
+              <div class="field" style="flex:1 1 260px">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="ten@email.com"/>
+              </div>
+              <div class="field" style="flex:1 1 260px">
+                <label for="studentName">Họ tên học sinh</label>
+                <input id="studentName" name="studentName" type="text" required placeholder="Lê Thị B"/>
+              </div>
+            </div>
+
+            <div class="inline">
+              <div class="field" style="flex:1 1 220px">
+                <label for="grade">Khối dự tuyển</label>
+                <select id="grade" name="grade" required>
+                  <option value="">Chọn khối</option>
+                  <option value="10">Lớp 10</option>
+                  <option value="11">Lớp 11</option>
+                  <option value="12">Lớp 12</option>
+                </select>
+              </div>
+              <div class="field" style="flex:2 1 460px">
+                <label for="notes">Ghi chú (nếu có)</label>
+                <input id="notes" name="notes" type="text" placeholder="Ví dụ: có chứng chỉ IELTS 6.0, cần tư vấn ký túc xá..."/>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="files">Tài liệu đính kèm (không bắt buộc)</label>
+              <input id="files" name="files" type="file" multiple/>
+              <p class="hint">Chấp nhận PDF/JPG/PNG. Có thể tải sau.</p>
+            </div>
+
+            <div class="inline" style="align-items:center;justify-content:space-between;margin-top:.5rem">
+              <span class="hint"><i class="fa-regular fa-clock"></i> Mất khoảng 3–5 phút để hoàn tất.</span>
+              <div class="inline">
+                <button type="button" class="btn" id="saveDraft"><i class="fa-regular fa-floppy-disk"></i> Lưu nháp</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Gửi đăng ký</button>
+              </div>
+            </div>
+
+            <p id="formMsg" class="hint" style="margin-top:.5rem"></p>
+          </form>
+        </div>
+
+        <aside>
+          <div class="card">
+            <div class="card-body">
+              <h3 style="color:var(--primary-color);margin-bottom:.5rem"><i class="fa-solid fa-headset"></i> Hỗ trợ tuyển sinh</h3>
+              <p class="muted small">Chúng tôi sẵn sàng tư vấn lịch đánh giá, nội dung chuẩn bị và lộ trình nhập học.</p>
+              <ul class="muted small" style="margin-left:1rem;display:grid;gap:.35rem;margin-top:.5rem">
+                <li><i class="fa-solid fa-phone"></i> (028) 3829 8976</li>
+                <li><i class="fa-solid fa-envelope"></i> admissions@lequydon.edu.vn</li>
+                <li><i class="fa-solid fa-location-dot"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+              </ul>
+              <div class="divider"></div>
+              <div class="faq">
+                <div class="faq-item">
+                  <div class="faq-q"><strong>Phí xét tuyển đóng như thế nào?</strong> <i class="fa-solid fa-chevron-down"></i></div>
+                  <div class="faq-a">Sau khi gửi đơn, hệ thống gửi hướng dẫn thanh toán chuyển khoản & mã tham chiếu. Vui lòng hoàn tất trước khi đặt lịch đánh giá.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-q"><strong>Chưa có chứng chỉ tiếng Anh thì sao?</strong> <i class="fa-solid fa-chevron-down"></i></div>
+                  <div class="faq-a">Không bắt buộc. Nhà trường tổ chức bài đánh giá nội bộ để xác định mức độ tiếng Anh hiện tại.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-q"><strong>Có hỗ trợ ký túc xá không?</strong> <i class="fa-solid fa-chevron-down"></i></div>
+                  <div class="faq-a">Nhà trường có khu ký túc xá cho học sinh ở xa; vui lòng ghi chú trong đơn để được hướng dẫn thủ tục.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer (kept) ================= -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trường THPT Lê Quý Đôn</h3>
+          <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+            <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+            <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+            <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+            <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+            <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+            <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Giờ Mở Cửa</h3>
+          <ul>
+            <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+            <li>Thứ 7: 7:00 - 11:30</li>
+            <li>Chủ nhật: Nghỉ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Scripts ================= -->
+  <script>
+    // Smooth navigation for header links (kept logic)
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if (!href) return;
+        if (href.startsWith('index.html')){
+          e.preventDefault();
+          window.location.href = href;
+          return;
+        }
+        if (href.startsWith('#')){
+          e.preventDefault();
+          const el=document.querySelector(href);
+          if (el){
+            window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
+          }
+        }
+      });
+    });
+
+    // Tabs behavior
+    const tabBtnProc = document.getElementById('tab-btn-proc');
+    const tabBtnDec  = document.getElementById('tab-btn-dec');
+    const panelProc  = document.getElementById('tab-proc');
+    const panelDec   = document.getElementById('tab-dec');
+    function activateTab(which){
+      if (which==='proc'){
+        tabBtnProc.setAttribute('aria-selected','true');
+        tabBtnDec.setAttribute('aria-selected','false');
+        panelProc.classList.add('active'); panelDec.classList.remove('active');
+      }else{
+        tabBtnProc.setAttribute('aria-selected','false');
+        tabBtnDec.setAttribute('aria-selected','true');
+        panelProc.classList.remove('active'); panelDec.classList.add('active');
+      }
+    }
+    tabBtnProc.addEventListener('click',()=>activateTab('proc'));
+    tabBtnDec.addEventListener('click',()=>activateTab('dec'));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-q').addEventListener('click',()=>{
+        item.classList.toggle('active');
+      });
+    });
+
+    // Simple form handling (demo only)
+    const form = document.getElementById('apply-form');
+    const msg  = document.getElementById('formMsg');
+    document.getElementById('saveDraft').addEventListener('click',()=>{
+      // Save minimal fields to localStorage (demo)
+      const data = {
+        parentName: form.parentName.value.trim(),
+        phone: form.phone.value.trim(),
+        email: form.email.value.trim(),
+        studentName: form.studentName.value.trim(),
+        grade: form.grade.value,
+        notes: form.notes.value.trim()
+      };
+      localStorage.setItem('lequydon_apply_draft', JSON.stringify(data));
+      msg.textContent = 'Đã lưu nháp trên trình duyệt của bạn.';
+      msg.style.color = '#065f46';
+    });
+    // Load draft if exists
+    const draft = localStorage.getItem('lequydon_apply_draft');
+    if (draft){
+      try{
+        const d = JSON.parse(draft);
+        form.parentName.value = d.parentName||'';
+        form.phone.value = d.phone||'';
+        form.email.value = d.email||'';
+        form.studentName.value = d.studentName||'';
+        form.grade.value = d.grade||'';
+        form.notes.value = d.notes||'';
+      }catch{}
+    }
+    // Submit (client-side demo)
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if (!form.checkValidity()){
+        msg.textContent='Vui lòng điền đầy đủ thông tin bắt buộc.';
+        msg.style.color='#b91c1c';
+        return;
+      }
+      msg.textContent='Đã gửi đăng ký! Vui lòng kiểm tra email để nhận hướng dẫn tiếp theo.';
+      msg.style.color='#065f46';
+      // Clear draft after "submit"
+      localStorage.removeItem('lequydon_apply_draft');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

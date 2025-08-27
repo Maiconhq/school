@@ -1,0 +1,830 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Bổng - THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #16a34a;
+            --accent-color: #f59e0b;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            white-space: nowrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--dark-color);
+        }
+
+        /* Page Header - Prominent Left Aligned */
+        .page-header {
+            text-align: left;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-color), #3b82f6, var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+             text-align: center;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: #fbbf24; /* vàng sang trọng */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    
+    /* Xóa hẳn các hiệu ứng gradient chữ cũ */
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+}
+
+
+
+
+       .page-header p {
+    font-size: 1.3rem;
+    color: #fefefe; /* sáng hơn */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    opacity: 1; /* bỏ độ mờ */
+}
+
+
+        /* Scholar Story Section */
+        .scholar-story {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .scholar-story::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 6rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .scholar-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .scholar-avatar img {
+    width: 80px;       /* kích thước avatar */
+    height: 80px;
+    border-radius: 50%; /* bo tròn thành hình tròn */
+    object-fit: cover;  /* hình không bị méo */
+}
+
+
+        .scholar-details h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .scholar-details p {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .scholar-story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-color);
+            margin-left: 1rem;
+        }
+
+        .scholar-story-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-color), #f97316);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Scholarship Image */
+        .scholarship-image {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .scholarship-image img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .scholarship-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 700;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--accent-color);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .timeline-content strong {
+            color: var(--secondary-color);
+        }
+
+        .timeline-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--warning-color);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+        }
+
+        /* Requirements Section */
+        .requirements-section {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .requirements-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .requirements-list li {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .requirements-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .requirement-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .requirement-text {
+            flex: 1;
+        }
+
+        .requirement-text strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+            color: white;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="20" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="15" fill="rgba(255,255,255,0.03)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), #f97316);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+            }
+
+            .scholar-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .scholar-story,
+            .timeline-section,
+            .requirements-section {
+                padding: 2rem;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 3rem;
+            }
+
+            .timeline-item::before {
+                left: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo img {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.3rem 0;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMmwxMCA2LjU3NkwyMiAxNC41ODV2My43MjFMMTIgMjIgMiAxOC4zMDZ2LTMuNzIxTDIgOC41NzZMMTIgMnoiPjwvcGF0aD48cGF0aCBkPSJTMTIgMTJhMiAyIDAgMCAwIDIgMHY3LjM1NmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAtOS4zMTJjMC0xLjIzLS44NzktMi4wNTItMi0yLjA1MnMtMiAuODIzLTIgMi4wNTJhNDY1LjQ3IDQ2NS40NyAwIDAgMCAwIDkuMzEyVjEyYTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PC9zdmc+" alt="Logo Trường Lê Quý Đôn">
+                    <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="index.html#about">Our School</a></li>
+                        <li><a href="index.html#admission">Tuyển Sinh</a></li>
+                        <li><a href="index.html#academics">Học Thuật</a></li>
+                        <li><a href="index.html#student-life">Đời Sống Học Đường</a></li>
+                        <li><a href="index.html#contact">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> > <span>Học bổng</span>
+        </div>
+
+        <div class="page-header">
+            <div class="page-header-content">
+                <h1><i class="fas fa-graduation-cap"></i> HỌC BỔNG</h1>
+                <p>Chương trình học bổng danh giá dành cho học sinh Việt Nam xuất sắc, mở ra cơ hội học tập quốc tế tại Trường THPT Lê Quý Đôn</p>
+            </div>
+        </div>
+
+        <section class="scholar-story">
+            <div class="scholar-info">
+    <div class="scholar-avatar">
+        <img src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/539496443_792391776645801_8903355822360178777_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=cTGs649qqVIQ7kNvwHidofc&_nc_oc=AdnkxaksjlPTNKytge2aOOWwwWt22Xrmx5LXoIhtzmVzuXtnRlYgkzhFVLDarEX8GUM&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=A7rH6cDqthCfDiqbootrvg&oh=00_AfW8QeVHTsDLshf7eRBLegQ7cCf7UKlUIRWMXOPeCZIGlg&oe=68B4FDA0" alt="Lê Thành Long">
+    </div>
+    <div class="scholar-details">
+        <h3>Tiến sĩ Lê Thành Long</h3>
+        <p>Nhà giáo dục và doanh nhân tầm vóc</p>
+    </div>
+</div>
+
+            
+            <div class="scholar-story-content">
+                <p>Tiến sĩ Lê Thành Long, cùng với ông Ferdinand Trần, Phó Chủ tịch Hội đồng Quản trị Phú Mỹ Hưng, đã phát triển ý tưởng thành lập một ngôi trường Mỹ chất lượng cao tại Việt Nam. Với tầm nhìn giáo dục thực sự, họ có một khát vọng mạnh mẽ cho Trường Quốc tế Nam Sài Gòn như một ngôi trường quốc tế với chương trình giáo dục Mỹ.</p>
+
+                <p>Trong nỗ lực tôn vinh Tiến sĩ Lê Thành Long và mong muốn phát triển những nhà lãnh đạo toàn cầu có nhân cách, <strong>bắt đầu từ năm 2005</strong>, Trường THPT Lê Quý Đôn đã chọn tôn vinh một học sinh người Việt Nam, người đã thể hiện cam kết mạnh mẽ đối với sự xuất sắc trong học thuật, thành thạo tiếng Anh, <strong>thể hiện các Giá trị Cốt lõi của chúng tôi</strong>, thể hiện sự quan tâm đến các vấn đề toàn cầu và quốc tế cùng với sẵn lòng phục vụ người khác bằng cách làm cho Việt Nam trở nên tốt đẹp hơn.</p>
+
+                <div class="highlight-box">
+                    <strong>Học Bổng:</strong> Mỗi năm, Trường THPT Lê Quý Đôn trao tặng học sinh này một suất học bổng 3 năm có thể gia hạn mang tên Tiến sĩ Lê Thành Long. Học sinh vào lớp 10 chỉ từng học tại các trường Việt Nam địa phương mới đủ điều kiện nộp đơn xin học bổng. Học sinh đã từng học tại trường quốc tế bất kỳ lúc nào trong quá trình học tập sẽ không đủ điều kiện nộp đơn.
+                </div>
+            </div>
+        </section>
+
+        <div class="scholarship-image">
+            <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1733471881/saigon/c4qly1tc7tajnqpbxhlz/LSTScholarship_2023_5_25SeniorWalkThroughG2Buddy.jpg" alt="Hình ảnh học bổng Tiến sĩ Lê Thành Long">
+        </div>
+
+        <section class="timeline-section">
+            <h2 class="section-title">
+                <i class="fas fa-calendar-alt"></i>
+                Lịch Trình Ứng Tuyển
+            </h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">7 tháng 12:</div>
+                    <div class="timeline-content">
+                        <strong>Mở đơn ứng tuyển.</strong> Sử dụng biểu mẫu này để nộp đơn (Ứng viên phải đăng nhập vào tài khoản Google để hoàn thành biểu mẫu)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">28 tháng 2:</div>
+                    <div class="timeline-content">
+                        <strong>Hạn chót nộp tất cả tài liệu ứng tuyển</strong>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">25 tháng 3:</div>
+                    <div class="timeline-content">
+                        <strong>Thảo luận nhóm và bài kiểm tra tuyển sinh</strong> (viết bài và sử dụng máy tính)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">24 tháng 4:</div>
+                    <div class="timeline-content">
+                        <strong>Phỏng vấn 3 ứng viên xuất sắc nhất</strong>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">9 tháng 5:</div>
+                    <div class="timeline-content">
+                        <strong>Công bố người chiến thắng học bổng</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-note">
+                <strong>Lưu ý:</strong> Lịch trình này chỉ mang tính tạm thời và có thể thay đổi.
+            </div>
+        </section>
+
+        <section class="requirements-section">
+            <h2 class="section-title">
+                <i class="fas fa-clipboard-list"></i>
+                Tài Liệu Cần Chuẩn Bị
+            </h2>
+            
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--dark-color);">
+                Ứng viên nên chuẩn bị sẵn các tài liệu và thông tin sau trước khi điền vào biểu mẫu ứng tuyển trực tuyến:
+            </p>
+
+            <ul class="requirements-list">
+                <li>
+                    <div class="requirement-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <div class="requirement-text">
+                        <strong>Bản sao trang ảnh hộ chiếu</strong>
+                        Bản photo rõ nét trang có ảnh của hộ chiếu ứng viên
+                    </div>
+                </li>
+
+                <li>
+                    <div class="requirement-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="requirement-text">
+                        <strong>Bảng điểm/Học bạ từ lớp 6 đến lớp 9 (học kỳ 1)</strong>
+                        Được dịch sang tiếng Anh bởi dịch vụ dịch thuật có giấy phép
+                    </div>
+                </li>
+
+                <li>
+                    <div class="requirement-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="requirement-text">
+                        <strong>Email công việc của giáo viên tiếng Anh lớp 9</strong>
+                        Địa chỉ email doanh nghiệp của giáo viên tiếng Anh lớp 9 tại trường hiện tại
+                    </div>
+                </li>
+
+                <li>
+                    <div class="requirement-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="requirement-text">
+                        <strong>Thư giới thiệu từ trường/giáo viên hiện tại</strong>
+                        (nếu có)
+                    </div>
+                </li>
+
+                <li>
+                    <div class="requirement-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <div class="requirement-text">
+                        <strong>Bài luận cá nhân (1-2 trang)</strong>
+                        Trình bày lý do bạn xứng đáng nhận học bổng này, các thành tích đã đạt được và đóng góp cho cộng đồng
+                    </div>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="cta-section">
+            <div class="cta-content">
+                <h3>Sẵn sàng để thay đổi tương lai của bạn?</h3>
+                <p>Nộp đơn ngay hôm nay để trở thành một phần của cộng đồng THPT Lê Quý Đôn và bắt đầu hành trình vươn ra thế giới.</p>
+                <a href="scholarship_apply.html" class="cta-button" target="_blank" rel="noopener noreferrer">
+  Ứng Tuyển Ngay <i class="fas fa-arrow-right"></i>
+</a>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Về chúng tôi</h3>
+                    <p>Trường THPT Lê Quý Đôn là một ngôi trường Mỹ chất lượng cao tại Việt Nam, cam kết phát triển những nhà lãnh đạo toàn cầu có nhân cách.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên kết nhanh</h3>
+                    <ul>
+                        <li><a href="#about">Our School</a></li>
+                        <li><a href="#admission">Tuyển Sinh</a></li>
+                        <li><a href="#academics">Học Thuật</a></li>
+                        <li><a href="#student-life">Đời Sống Học Đường</a></li>
+                        <li><a href="scholarship.html">Học Bổng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Liên hệ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Đường Lê Quý Đôn, Quận 1, TP. Hồ Chí Minh</p>
+                    <p><i class="fas fa-phone"></i> (028) 3829 8976</p>
+                    <p><i class="fas fa-envelope"></i> info@thptlequydon.edu.vn</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Trường THPT Lê Quý Đôn. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

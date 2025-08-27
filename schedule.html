@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký Tham Quan - THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e3a8a;
+            --secondary: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+            transform: rotate(30deg);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            font-size: 32px;
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .form-section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        label i {
+            width: 20px;
+            color: var(--primary);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: var(--light);
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+            background-color: white;
+            transform: translateY(-2px);
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        .input-icon input {
+            padding-left: 45px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--error);
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 86, 219, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(6, 95, 70, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .error {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #6b7280;
+            font-size: 14px;
+            width: 100%;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            right: 5%;
+            font-size: 200px;
+            color: var(--primary);
+        }
+        
+        .decoration-2 {
+            bottom: 10%;
+            left: 5%;
+            font-size: 150px;
+            color: var(--secondary);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 26px;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration decoration-1">
+        <i class="fas fa-graduation-cap"></i>
+    </div>
+    <div class="decoration decoration-2">
+        <i class="fas fa-school"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-school"></i>
+                TRƯỜNG THPT LÊ QUÝ ĐÔN
+            </div>
+            <h1>ĐĂNG KÝ THAM GIA THAM QUAN</h1>
+            <p>Vui lòng điền đầy đủ thông tin dưới đây</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="excursionForm">
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user-graduate"></i>
+                        Thông tin học sinh
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="studentName" class="required">
+                            <i class="fas fa-signature"></i>
+                            Họ và tên học sinh
+                        </label>
+                        <div class="input-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="studentName" name="studentName" required placeholder="Nguyễn Văn A">
+                        </div>
+                        <div class="error" id="studentNameError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Vui lòng nhập họ tên học sinh
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentEmail" class="required">
+                            <i class="fas fa-envelope"></i>
+                            Email học sinh
+                        </label>
+                        <div class="input-icon">
+                            <i class="fas fa-at"></i>
+                            <input type="email" id="studentEmail" name="studentEmail" required placeholder="nguyenvana@example.com">
+                        </div>
+                        <div class="error" id="studentEmailError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Vui lòng nhập email hợp lệ
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Thông tin phụ huynh
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="parentName" class="required">
+                            <i class="fas fa-signature"></i>
+                            Họ và tên phụ huynh
+                        </label>
+                        <div class="input-icon">
+                            <i class="fas fa-user-friends"></i>
+                            <input type="text" id="parentName" name="parentName" required placeholder="Nguyễn Văn B">
+                        </div>
+                        <div class="error" id="parentNameError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Vui lòng nhập họ tên phụ huynh
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentEmail" class="required">
+                            <i class="fas fa-envelope"></i>
+                            Email phụ huynh
+                        </label>
+                        <div class="input-icon">
+                            <i class="fas fa-at"></i>
+                            <input type="email" id="parentEmail" name="parentEmail" required placeholder="nguyenvanb@example.com">
+                        </div>
+                        <div class="error" id="parentEmailError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Vui lòng nhập email hợp lệ
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentPhone" class="required">
+                            <i class="fas fa-phone"></i>
+                            Số điện thoại phụ huynh
+                        </label>
+                        <div class="input-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                            <input type="tel" id="parentPhone" name="parentPhone" required placeholder="0912345678">
+                        </div>
+                        <div class="error" id="parentPhoneError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Vui lòng nhập số điện thoại hợp lệ
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="pulse">
+                    <i class="fas fa-paper-plane"></i>
+                    GỬI ĐĂNG KÝ
+                </button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <p><i class="fas fa-check-circle"></i> Đăng ký tham quan thành công! Cảm ơn bạn đã gửi thông tin.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Trường THPT Lê Quý Đôn &copy; 2023 | Ươm mầm tri thức - Chắp cánh tương lai</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('excursionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset errors
+            const errorElements = document.querySelectorAll('.error');
+            errorElements.forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Validate form
+            let isValid = true;
+            
+            const studentName = document.getElementById('studentName');
+            if (!studentName.value.trim()) {
+                document.getElementById('studentNameError').style.display = 'flex';
+                isValid = false;
+            }
+            
+            const studentEmail = document.getElementById('studentEmail');
+            if (!studentEmail.value.trim() || !isValidEmail(studentEmail.value)) {
+                document.getElementById('studentEmailError').style.display = 'flex';
+                isValid = false;
+            }
+            
+            const parentName = document.getElementById('parentName');
+            if (!parentName.value.trim()) {
+                document.getElementById('parentNameError').style.display = 'flex';
+                isValid = false;
+            }
+            
+            const parentEmail = document.getElementById('parentEmail');
+            if (!parentEmail.value.trim() || !isValidEmail(parentEmail.value)) {
+                document.getElementById('parentEmailError').style.display = 'flex';
+                isValid = false;
+            }
+            
+            const parentPhone = document.getElementById('parentPhone');
+            if (!parentPhone.value.trim() || !isValidPhone(parentPhone.value)) {
+                document.getElementById('parentPhoneError').style.display = 'flex';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                const submitBtn = document.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG GỬI...';
+                submitBtn.classList.remove('pulse');
+                
+                // Send data to Google Apps Script
+                const formData = new FormData(this);
+                
+                fetch('https://script.google.com/macros/s/AKfycbwvrpihnzITESPVPzHwCoM6UA3Drj4OitZHb03-oT0_KLBzJsrRGEYB_NniB9AkX1qYOA/exec', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        document.getElementById('excursionForm').reset();
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            document.getElementById('successMessage').style.display = 'none';
+                        }, 5000);
+                    } else {
+                        alert('Có lỗi xảy ra khi gửi biểu mẫu. Vui lòng thử lại.');
+                    }
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> GỬI ĐĂNG KÝ';
+                    submitBtn.classList.add('pulse');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi gửi biểu mẫu. Vui lòng thử lại.');
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> GỬI ĐĂNG KÝ';
+                    submitBtn.classList.add('pulse');
+                });
+            }
+        });
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function isValidPhone(phone) {
+            const re = /^[0-9]{10,11}$/;
+            return re.test(phone);
+        }
+        
+        // Add subtle animations to form elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.form-group').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

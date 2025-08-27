@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đời Sống Học Đường - THPT Lê Quý Đôn</title>
+
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ============ Reset & Theme ============ */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-color:#1e3a8a;
+      --secondary-color:#16a34a;
+      --accent-color:#f59e0b;
+      --light-color:#f3f4f6;
+      --soft-light:#fafafa;
+      --dark-color:#1f2937;
+      --muted:#6b7280;
+      --radius:14px;
+      --shadow-1:0 6px 24px rgba(0,0,0,.08);
+      --shadow-2:0 10px 30px rgba(30,58,138,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Be Vietnam Pro',sans-serif;color:#111827;background:#fff;line-height:1.6}
+
+    /* ============ Layout ============ */
+    .container{width:90%;max-width:1200px;margin:0 auto}
+    .section{padding:2.75rem 0}
+    .pad-top{padding-top:96px} /* offset fixed header */
+    .kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+    .kicker i{font-size:.95rem;color:var(--accent-color)}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .75rem;border-radius:999px;background:var(--light-color);color:#374151;font-weight:600;font-size:.85rem}
+
+    /* ============ Header (kept) ============ */
+    header{background:var(--primary-color);color:#fff;padding:1rem 0;position:fixed;inset:0 0 auto 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    .header-content{display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:.75rem}
+    .logo img{height:50px}
+    .logo h1{font-size:1.5rem;font-weight:700;white-space:nowrap}
+    nav ul{list-style:none;display:flex;gap:1.25rem;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;font-weight:500;display:inline-block}
+    nav a:hover{color:var(--accent-color)}
+
+    /* ============ Hero ============ */
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+    .hero-card{
+      background:linear-gradient(135deg,var(--primary-color),#2d4ba8);
+      color:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-2)
+    }
+    .hero h1{font-size:2.25rem;line-height:1.2;margin:.5rem 0 1rem}
+    .hero p{font-size:1.05rem;color:#e5e7eb}
+    .hero-actions{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap}
+    .btn{appearance:none;border:0;outline:0;cursor:pointer;border-radius:12px;padding:.9rem 1.1rem;font-weight:600}
+    .btn-primary{background:#fff;color:var(--primary-color)}
+    .btn-primary:hover{filter:brightness(0.98)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.35);color:#fff}
+    .btn-ghost:hover{border-color:#fff}
+    .hero-media{
+      border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-2);position:relative;min-height:260px
+    }
+    .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-stats{
+      position:absolute;inset:auto 12px 12px auto;background:rgba(255,255,255,.95);
+      color:#111827;border-radius:12px;padding:.65rem .9rem;box-shadow:var(--shadow-1);font-size:.9rem
+    }
+
+    /* ============ Highlights ============ */
+    .highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.25rem}
+    .chip{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1rem;display:flex;gap:.75rem;align-items:flex-start;box-shadow:var(--shadow-1)}
+    .chip i{font-size:1.25rem;color:var(--primary-color)}
+
+    /* ============ Tabs ============ */
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.75rem}
+    .tab{
+      background:var(--soft-light);border:1px solid #e5e7eb;border-radius:14px;padding:1.1rem 1.25rem;cursor:pointer;
+      display:flex;align-items:center;gap:.75rem;font-weight:600;color:#111827;transition:.2s;text-align:left
+    }
+    .tab i{color:var(--primary-color)}
+    .tab[aria-selected="true"]{background:#fff;border-color:var(--primary-color);box-shadow:var(--shadow-1)}
+    .tab[aria-selected="true"] i{color:var(--secondary-color)}
+    .tabpanels{margin-top:1.25rem}
+    .tabpanel{display:none}
+    .tabpanel.active{display:block}
+
+    /* ============ Cards, galleries ============ */
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:var(--shadow-1)}
+    .card-body{padding:1.25rem}
+    .grid-2{display:grid;grid-template-columns:1.15fr .85fr;gap:2rem}
+    .grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:.5rem}
+    .gallery .imgbox{position:relative;border-radius:12px;overflow:hidden;min-height:180px}
+    .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
+    .gallery .imgbox:hover img{transform:scale(1.05)}
+    .tag{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem .6rem;border-radius:999px;background:var(--light-color);font-size:.8rem;color:#374151}
+
+    /* ============ Lists & tables ============ */
+    ul.clean{list-style:none;display:grid;gap:.5rem;margin-left:.5rem}
+    .info-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .info-item{background:var(--light-color);border-radius:12px;padding:1rem}
+
+    /* ============ CTA ============ */
+    .cta{background:linear-gradient(135deg,#0ea5e9,#1e3a8a);color:#fff;border-radius:16px;padding:1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+    .cta .btn{background:#fff;color:#0f172a}
+
+    /* ============ FAQ ============ */
+    .faq{display:grid;gap:.75rem}
+    .faq-item{border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+    .faq-q{background:#fff;padding:1rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .faq-a{padding:0 1rem;max-height:0;overflow:hidden;background:var(--soft-light);transition:max-height .25s ease}
+    .faq-item.active .faq-a{padding:1rem;max-height:300px}
+
+    /* ============ Footer (kept) ============ */
+    footer{background:var(--dark-color);color:#fff;padding:3rem 0 1rem;margin-top:2rem}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
+    .footer-column h3{font-size:1.2rem;margin-bottom:1.5rem;color:var(--accent-color)}
+    .footer-column ul{list-style:none}
+    .footer-column li{margin-bottom:.8rem}
+    .footer-column a{color:#ddd;text-decoration:none}
+    .footer-column a:hover{color:var(--accent-color)}
+    .social-links{display:flex;gap:1rem;margin-top:1rem}
+    .social-links a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+    .social-links a:hover{background:var(--accent-color);transform:translateY(-3px)}
+    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+
+    /* ============ Responsive ============ */
+    @media (max-width: 992px){
+      .header-content{flex-direction:column;gap:.75rem}
+      nav ul{justify-content:center}
+      .hero{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .tabs{grid-template-columns:1fr;gap:.6rem}
+    }
+    @media (max-width:520px){
+      .logo{flex-direction:column;text-align:center}
+      .logo h1{font-size:1.25rem}
+      nav ul{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- ================= Header (kept) ================= -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Rya2UtbGluZWNhcD0icm91bmQiIHN0cmlrZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAybDEwIDYuNTc2TDIyIDE0LjU4NXYzLjcyMUwxMiAyMiAyIDE4LjMwNnYtMy43MjFMMiA4LjU3NkwxMiAyWiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMmEyIDIgMCAwIDAgMiAwdjcuMzU2YTQ2NS40NyA0NjUuNDcgMCAwIDAgMC05LjMxMmMwLTEuMjMtLjg3OS0yLjA1Mi0yLTIuMDUycy0yIC44MjMtMiAyLjA1MmE0NjUuNDcgNDY1LjQ3IDAgMCAwIDAgOS4zMTJWMTJhMiAyIDAgMCAwIDItMnoiPjwvcGF0aD48L3N2Zz4=" alt="Logo Trường Lê Quý Đôn">
+          <h1>TRƯỜNG THPT LÊ QUÝ ĐÔN</h1>
+        </div>
+        <nav aria-label="Điều hướng chính">
+          <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="index.html#about">Our School</a></li>
+            <li><a href="index.html#admission">Tuyển Sinh</a></li>
+            <li><a href="index.html#academics">Học Thuật</a></li>
+            <li><a href="student-life.html" aria-current="page" style="color:#fbbf24;font-weight:700">Đời Sống Học Đường</a></li>
+            <li><a href="applying.html">Nộp Hồ Sơ</a></li>
+            <li><a href="#contact">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="pad-top">
+    <!-- ================= Hero ================= -->
+    <section class="section">
+      <div class="container hero">
+        <div class="hero-card">
+          <span class="kicker"><i class="fa-solid fa-people-roof"></i> Môi trường năng động & nhân ái</span>
+          <h1>Đời sống học đường</h1>
+          <p>
+            Tại <strong>THPT Lê Quý Đôn</strong>, học sinh được phát triển toàn diện qua ba mảng nổi bật:
+            <strong>Nghệ thuật</strong> để nuôi dưỡng sáng tạo, <strong>Thể thao</strong> để rèn luyện thể chất & kỷ luật,
+            và hơn <strong>20+ Câu lạc bộ</strong> để theo đuổi đam mê, xây dựng kỹ năng.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#discover"><i class="fa-solid fa-compass"></i>&nbsp;Khám phá ngay</a>
+            <a class="btn btn-ghost" href="#clubs"><i class="fa-solid fa-user-group"></i>&nbsp;Danh sách CLB</a>
+          </div>
+        </div>
+        <figure class="hero-media" aria-label="Ảnh hoạt động học sinh">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop" alt="Học sinh hoạt động ngoại khóa">
+          <figcaption class="hero-stats badge"><i class="fa-solid fa-face-smile"></i> An toàn • Gắn kết • Tôn trọng</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= Quick highlights ================= -->
+    <section class="section" id="discover" style="padding-top:0">
+      <div class="container">
+        <div class="highlights">
+          <div class="chip">
+            <i class="fa-solid fa-masks-theater"></i>
+            <div>
+              <strong>Nghệ thuật đa dạng</strong>
+              <div class="muted">Âm nhạc, hội họa, kịch nghệ… khơi gợi năng khiếu & tư duy sáng tạo.</div>
+            </div>
+          </div>
+          <div class="chip">
+            <i class="fa-solid fa-basketball"></i>
+            <div>
+              <strong>Thể thao phong phú</strong>
+              <div class="muted">Nhiều bộ môn giúp rèn sức khỏe, tinh thần đồng đội và kỷ luật.</div>
+            </div>
+          </div>
+          <div class="chip">
+            <i class="fa-solid fa-people-line"></i>
+            <div>
+              <strong>20+ Câu lạc bộ</strong>
+              <div class="muted">Từ học thuật đến nghệ thuật, thể thao — phát triển đam mê và kỹ năng.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Tabs: Art / Sports / Clubs ================= -->
+    <section class="section" style="background:var(--soft-light)">
+      <div class="container">
+        <div class="kicker"><i class="fa-solid fa-layer-group"></i> Các mảng hoạt động chính</div>
+        <h2 style="color:var(--primary-color)">Khám phá chương trình</h2>
+        <div class="tabs" role="tablist" aria-label="Nhóm nội dung đời sống học đường">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="tab-art" id="tab-btn-art">
+            <i class="fa-solid fa-palette"></i> Nghệ thuật
+          </button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sport" id="tab-btn-sport">
+            <i class="fa-solid fa-dumbbell"></i> Thể thao
+          </button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-club" id="tab-btn-club">
+            <i class="fa-solid fa-users-rectangle"></i> Câu lạc bộ
+          </button>
+        </div>
+
+        <div class="tabpanels">
+          <!-- ========== ART ========== -->
+          <section id="tab-art" class="tabpanel active" role="tabpanel" aria-labelledby="tab-btn-art">
+            <div class="grid-2" style="margin-top:1rem">
+              <article class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.4rem"><i class="fa-regular fa-star"></i> Nghệ thuật: khơi mở sáng tạo</h3>
+                  <p class="muted">
+                    Các hoạt động nghệ thuật đa dạng từ <strong>âm nhạc</strong>, <strong>hội họa</strong>, đến <strong>kịch nghệ</strong>
+                    giúp học sinh phát triển năng khiếu, tư duy thẩm mỹ và khả năng thể hiện bản thân.
+                  </p>
+                  <div class="info-list" style="margin-top:1rem">
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-music"></i> Âm nhạc</strong>
+                      <ul class="clean muted">
+                        <li>Hợp xướng, ban nhạc, guitar, piano.</li>
+                        <li>Trình diễn học kỳ & Hội diễn LQD Fest.</li>
+                      </ul>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-brush"></i> Mỹ thuật</strong>
+                      <ul class="clean muted">
+                        <li>Vẽ, thiết kế đồ họa, nhiếp ảnh cơ bản.</li>
+                        <li>Triển lãm “Art Walk” mỗi học kỳ.</li>
+                      </ul>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-masks-theater"></i> Kịch nghệ</strong>
+                      <ul class="clean muted">
+                        <li>Sân khấu học đường, kỹ năng diễn xuất & nói trước công chúng.</li>
+                        <li>Vở diễn lớn vào cuối năm học.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="cta" style="margin-top:1rem">
+                    <div><strong>Muốn tham gia biểu diễn?</strong><div class="muted" style="color:#e0e7ff">Đăng ký thử giọng & nhận lịch tập phù hợp.</div></div>
+                    <a href="#contact" class="btn"><i class="fa-solid fa-microphone-lines"></i> Đăng ký thử giọng</a>
+                  </div>
+                </div>
+              </article>
+              <aside class="card">
+                <div class="card-body">
+                  <strong class="muted">Khoảnh khắc nghệ thuật</strong>
+                  <div class="gallery">
+                    <div class="imgbox"><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop" alt="Ban nhạc học sinh"></div>
+                    <div class="imgbox"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Vẽ tranh"></div>
+                    <div class="imgbox"><img src="https://images.unsplash.com/photo-1533236897111-3e94666b2edf?q=80&w=1200&auto=format&fit=crop" alt="Sân khấu kịch nghệ"></div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <!-- ========== SPORTS ========== -->
+          <section id="tab-sport" class="tabpanel" role="tabpanel" aria-labelledby="tab-btn-sport">
+            <div class="grid-2" style="margin-top:1rem">
+              <article class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.4rem"><i class="fa-solid fa-heart-pulse"></i> Thể thao: khỏe mạnh & kỷ luật</h3>
+                  <p class="muted">
+                    Hệ thống các môn thể thao đa dạng giúp học sinh rèn luyện <strong>sức khỏe</strong>,
+                    <strong>tinh thần đồng đội</strong> và <strong>kỷ luật</strong>. Đội tuyển nhà trường thường xuyên tham gia
+                    các giải cấp thành phố.
+                  </p>
+
+                  <div class="grid-auto" style="margin-top:1rem">
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-futbol"></i> Bóng đá</strong>
+                      <div class="muted">Sân cỏ nhân tạo, CLB nam/nữ, tuyển chọn đội năng khiếu.</div>
+                      <span class="tag"><i class="fa-regular fa-calendar"></i> T2–T5: 16:00–17:30</span>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-basketball"></i> Bóng rổ</strong>
+                      <div class="muted">Sân tiêu chuẩn, đội tuyển thi đấu thường niên.</div>
+                      <span class="tag"><i class="fa-regular fa-calendar"></i> T3–T6: 16:00–17:30</span>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-shuttle-space"></i> Cầu lông</strong>
+                      <div class="muted">Nhà đa năng, lớp căn bản & nâng cao.</div>
+                      <span class="tag"><i class="fa-regular fa-calendar"></i> T2–T7: 15:30–17:00</span>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-person-swimming"></i> Bơi lội</strong>
+                      <div class="muted">Liên kết trung tâm bơi gần trường, huấn luyện viên chuyên môn.</div>
+                      <span class="tag"><i class="fa-regular fa-calendar"></i> T4–T7: 16:30–18:00</span>
+                    </div>
+                  </div>
+
+                  <div class="cta" style="margin-top:1rem">
+                    <div><strong>Tham gia đội tuyển?</strong><div class="muted" style="color:#e0e7ff">Đăng ký kiểm tra thể lực & kỹ năng đầu vào.</div></div>
+                    <a href="#contact" class="btn"><i class="fa-solid fa-clipboard-check"></i> Đăng ký try-out</a>
+                  </div>
+                </div>
+              </article>
+              <aside class="card">
+                <div class="card-body">
+                  <strong class="muted">Khoảnh khắc thể thao</strong>
+                  <div class="gallery">
+                    <div class="imgbox"><img src="https://nld.mediacdn.vn/zoom/700_438/291774122806476800/2024/5/24/img1818-171653596432345000743-207-557-1231-2195-crop-1716536184819377760399.jpg" alt="Bóng đá học đường"></div>
+                    <div class="imgbox"><img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop" alt="Bóng rổ học đường"></div>
+                    <div class="imgbox"><img src="https://kenh14cdn.com/thumb_w/600/2016/rmit5-1459097690542.jpg" alt="Cầu lông nhà đa năng"></div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <!-- ========== CLUBS ========== -->
+          <section id="tab-club" class="tabpanel" role="tabpanel" aria-labelledby="tab-btn-club">
+            <div class="grid-2" style="margin-top:1rem">
+              <article class="card">
+                <div class="card-body">
+                  <h3 style="color:var(--primary-color);margin-bottom:.4rem"><i class="fa-solid fa-user-group"></i> Câu lạc bộ: hơn 20 lựa chọn</h3>
+                  <p class="muted">
+                    Hơn <strong>20 câu lạc bộ</strong> từ học thuật đến nghệ thuật, thể thao giúp học sinh phát triển toàn diện kỹ năng
+                    và đam mê. Mọi CLB đều có <strong>Ban chủ nhiệm</strong> và <strong>giáo viên cố vấn</strong>.
+                  </p>
+
+                  <div class="grid-auto" id="clubs" style="margin-top:1rem">
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-robot"></i> Robotics & STEM</strong>
+                      <div class="muted">Thi đấu sáng tạo, lập trình, in 3D.</div>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-scale-balanced"></i> Tranh biện</strong>
+                      <div class="muted">Rèn tư duy phản biện, diễn thuyết tiếng Việt/Anh.</div>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-newspaper"></i> Báo chí – Media</strong>
+                      <div class="muted">Nhiếp ảnh, dựng video, quản trị mạng xã hội trường.</div>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-hand-holding-heart"></i> Tình nguyện</strong>
+                      <div class="muted">Dự án cộng đồng, gây quỹ, bảo vệ môi trường.</div>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-chess-knight"></i> Cờ vua</strong>
+                      <div class="muted">Luyện chiến thuật, thi đấu nội bộ & liên trường.</div>
+                    </div>
+                    <div class="info-item">
+                      <strong><i class="fa-solid fa-guitar"></i> Acoustic</strong>
+                      <div class="muted">Biểu diễn sân khấu, giao lưu âm nhạc.</div>
+                    </div>
+                  </div>
+
+                  <div class="cta" style="margin-top:1rem">
+                    <div><strong>Không thấy CLB bạn thích?</strong><div class="muted" style="color:#e0e7ff">Gợi ý thành lập CLB mới với tối thiểu 10 thành viên.</div></div>
+                    <a href="#contact" class="btn"><i class="fa-solid fa-plus"></i> Đề xuất CLB mới</a>
+                  </div>
+                </div>
+              </article>
+              <aside class="card">
+                <div class="card-body">
+                  <strong class="muted">Hỏi đáp nhanh</strong>
+                  <div class="faq" style="margin-top:.5rem">
+                    <div class="faq-item">
+                      <div class="faq-q"><span><strong>Đăng ký CLB như thế nào?</strong></span><i class="fa-solid fa-chevron-down"></i></div>
+                      <div class="faq-a">Học sinh đăng ký trực tuyến qua hệ thống hoặc trực tiếp tại phòng Công tác Học sinh. Đa số CLB tuyển thành viên vào đầu học kỳ.</div>
+                    </div>
+                    <div class="faq-item">
+                      <div class="faq-q"><span><strong>CLB có thu phí không?</strong></span><i class="fa-solid fa-chevron-down"></i></div>
+                      <div class="faq-a">Một số CLB có khoản phí nhỏ cho hoạt động/vật tư. Mức phí (nếu có) được công bố minh bạch khi tuyển thành viên.</div>
+                    </div>
+                    <div class="faq-item">
+                      <div class="faq-q"><span><strong>Phụ huynh theo dõi hoạt động ra sao?</strong></span><i class="fa-solid fa-chevron-down"></i></div>
+                      <div class="faq-a">Nhà trường gửi bản tin hàng tháng và cập nhật trên fanpage/website. Sự kiện lớn sẽ có thư mời phụ huynh tham dự.</div>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Contact strip ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <strong>Liên hệ Phòng Công tác Học sinh</strong>
+            <div class="muted" style="color:#e0e7ff">Tư vấn tham gia CLB, đội tuyển và hoạt động nghệ thuật – thể thao.</div>
+          </div>
+          <div class="badge"><i class="fa-solid fa-phone"></i> (028) 3829 8976</div>
+          <a href="mailto:studentlife@lequydon.edu.vn" class="btn"><i class="fa-solid fa-envelope"></i> studentlife@lequydon.edu.vn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer (kept) ================= -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trường THPT Lê Quý Đôn</h3>
+          <p>Ngôi trường với hơn 60 năm truyền thống giáo dục xuất sắc, đào tạo những thế hệ học sinh ưu tú cho đất nước.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Hệ</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 125 Điện Biên Phủ, P.Đa Kao, Quận 1, TP.HCM</li>
+            <li><i class="fas fa-phone"></i> (028) 3829 8976</li>
+            <li><i class="fas fa-envelope"></i> info@lequydon.edu.vn</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="inquire.html"><i class="fas fa-angle-right"></i> Inquire</a></li>
+            <li><a href="visit.html"><i class="fas fa-angle-right"></i> Visit</a></li>
+            <li><a href="applying.html"><i class="fas fa-angle-right"></i> Applying</a></li>
+            <li><a href="tuition.html"><i class="fas fa-angle-right"></i> Học phí</a></li>
+            <li><a href="scholarship.html"><i class="fas fa-angle-right"></i> Học bổng</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Giờ Mở Cửa</h3>
+          <ul>
+            <li>Thứ 2 - Thứ 6: 7:00 - 17:00</li>
+            <li>Thứ 7: 7:00 - 11:30</li>
+            <li>Chủ nhật: Nghỉ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Trường THPT Lê Quý Đôn. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Scripts ================= -->
+  <script>
+    // Smooth navigation for header links (kept logic)
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if (!href) return;
+        if (href.startsWith('index.html')){
+          e.preventDefault();
+          window.location.href = href;
+          return;
+        }
+        if (href.startsWith('#')){
+          e.preventDefault();
+          const el=document.querySelector(href);
+          if (el){
+            window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
+          }
+        }
+      });
+    });
+
+    // Tabs behavior
+    const tabs = [
+      {btn: 'tab-btn-art', panel: 'tab-art'},
+      {btn: 'tab-btn-sport', panel: 'tab-sport'},
+      {btn: 'tab-btn-club', panel: 'tab-club'},
+    ];
+    tabs.forEach(({btn,panel})=>{
+      const b=document.getElementById(btn);
+      b.addEventListener('click', ()=>{
+        tabs.forEach(({btn:bb,panel:pp})=>{
+          document.getElementById(bb).setAttribute('aria-selected', bb===btn ? 'true' : 'false');
+          document.getElementById(pp).classList.toggle('active', pp===panel);
+        });
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-q').addEventListener('click',()=>{
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
